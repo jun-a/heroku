@@ -1,0 +1,19 @@
+
+  <% if @member_messages.present?  %>
+  <% @member_messages.each do |message| %>
+  <div class="comments  col-lg-12">
+    <div class="form-group">
+      <%= link_to image_tag(message.from_member.image.url,:size => "50x50"), member_path(message.from_member.id) %>
+
+<!--投稿者の社員個別ページのプロフィール写真が反映-->
+<!--名前はどうする？-->
+      <i class="<%= message.message_icon.try(:icon)  %>"></i>
+      <%= message.message %>
+      by
+      <%= link_to "#{message.from_member.name}", member_path(message.from_member.id) %>
+
+    </div>
+  </div>
+
+<% end %>
+<% end %>

@@ -1,0 +1,72 @@
+<%= render template: 'layouts/_nav_bar' %>
+<div class="container">
+    <%= search_form_for @search, url: member_index_admin_users_path(params[:q]) do |f| %>
+    <div class="searchitem row">
+      <div class="form-group col-md-6 col-xs-6">
+        <%= f.label :name_or_kana_cont, '名前', class: "control-label" %>
+        <% if params[:q].present? %>
+        <% if params[:q][:name_or_kana_cont].present? %>
+        <%= f.search_field :name_or_kana_cont, :placeholder => "#{params[:q][:name_or_kana_cont]}", rows: "3" %>
+        <% else %>
+        <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+        <% end %>
+        <% else %>
+        <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+        <% end %>
+      </div>
+      <div class="form-group col-md-6 col-xs-6" style="text-align: center">
+        <%= f.label :department, '所属部署' %>
+        <br>
+        <% if params[:q].present? %>
+        <% if params[:q][:departments_id_in].present? %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :selected => params[:q][:departments_id_in], :include_blank => true %>
+        <% else %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+        <% end %>
+        <% else %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group search">
+      <%= f.submit "社員を表示", class: "btn btn-material-pink"%>
+    </div>
+    <% end %>
+<!--ここに検索結果をだす→テーブルで-->
+    <h4 class="result">検索結果</h4>
+    <div class="panel panel-default">
+    表示人数:  <%= @results.count %>人
+      <table class="table table-striped table-hover ">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>名前</th>
+            <th>チャットワークid</th>
+            <th>内線番号</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @results.each_with_index do |result, idx| %>
+          <% if idx % 2 == 0 %>
+          <tr class="success">
+            <% else %>
+            <tr>
+              <% end %>
+              <td><%= result.id %></td>
+              <td><%= result.name %></td>
+              <td><%= result. chatwork_id%></td>
+              <td><%= result.indoor_call %></td>
+              <td><%= link_to '詳細', member_path(result.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <style media="screen">
+      th {
+        text-align: center;
+      }
+    </style>
+
+</div>

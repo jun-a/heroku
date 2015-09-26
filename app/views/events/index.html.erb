@@ -1,0 +1,62 @@
+<head>
+  <meta charset="UTF-8">
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="dist/css/roboto.min.css" rel="stylesheet">
+  <link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+  <link href="dist/css/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+</head>
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+  <div class="container">
+    <div class="form-group">
+        <%= link_to '新規イベント作成', new_event_path, class: "btn btn-material-pink" %>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="icon-preview">
+          <i class="mdi-social-mood"></i>
+          <span>&nbsp;イベント一覧</span>
+        </div>
+        <div class="row">
+            <% @events.each_with_index do |event, idx| %>
+            <div class="event_index panel panel-default">
+              <div class="panel-heading">
+                <%= link_to event.name, event_path(event.id) %>
+                <%= event.event_day.strftime("%y年 %m月 %d日") if event.event_day.present?  %>
+              </div>
+
+              <div class="event_show" style="margin-left: 2%; margin-top: 1%">
+                <%= truncate("#{event.description}", :omission => "・・・", length: 23) if event.description.present? %>
+                <br>
+                <p>イベント作成者
+                <br><%= link_to event.member.name, member_path(event.member.id) %></p>
+                <br>イベント参加人数<br>
+                <%= event.members.count %>人 <br>
+                <div class="form-group">
+                  <%= link_to '編集', edit_event_path(event.id), class: 'btn btn-material-grey'  if event.member_id = current_member.id %>
+                </div>
+              </div>
+            </div>
+          <div class="form-group">
+          </div>
+            <% end %>
+        </div>
+        <div style="text-align:center">
+          <%= paginate(@events) %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>

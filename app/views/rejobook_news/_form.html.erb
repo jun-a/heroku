@@ -1,0 +1,27 @@
+<%= form_for @rejobook_news do |f| %>
+
+<div class="container">
+  <div class="panel-head panel panel-default panel-body">
+
+    <div class="form-group">
+      <%= f.label :title, 'タイトル', class: "col-lg-3 control-label" %>
+      <div class="col-lg-9">
+        <%= f.text_field :title, class: "title", placeholder: "タイトルを入力してください"  %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :content, '内容', class: "col-lg-3 control-label" %>
+      <div class="col-lg-9">
+        <%= f.text_area :content, class: "news_content", placeholder: "内容を入力してください"%>
+      </div>
+    </div>
+
+    <%= f.hidden_field 'member_id', :value => current_member.id %>
+
+      <%= f.submit '投稿', class: 'btn btn-material-pink' %>
+      <input class="btn btn-material-grey" type="reset" value="リセット">
+
+  </div>
+</div>
+<% end %>

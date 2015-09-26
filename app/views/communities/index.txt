@@ -1,0 +1,27 @@
+<% @communities.each do |community| %>
+<table border = '1'>
+  <tr>
+    <td>コミュニティ名:</td><td><%= community.name %></td>
+  </tr>
+  <tr>
+    <td>説明:</td><td><%= community.try(:description) %></td>
+  </tr>
+  <tr>
+    <td>ロゴ:</td><td><img src="/images/<%= community.try(:community_image) %>" alt="" /></td>
+  </tr>
+  <tr>
+    <td>コミュニティ参加者:</td>
+    <!--ここは複数系じゃないといけない-->
+    <% community.members.each do |member| %>
+      <tr>
+      <td><%= member.name %></td>
+      </tr>
+    <% end %>
+  </tr>
+  <tr>
+    <%= link_to '詳細', edit_community_path(community.id) %>
+  </tr>
+</table>
+<% end %>
+
+<%= link_to '新規登録', new_community_path %>

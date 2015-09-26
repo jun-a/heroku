@@ -1,0 +1,23 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<div class="container">
+  <div class="panel panel-body panel-default">
+    <div class="icon-preview">
+      <i class="mdi-action-help"></i>
+      <span>お問い合わせ</span>
+    </div>
+
+    <form action="/contact/post_contact" class="form-horizontal" method="post">
+      <div class="row" style="margin-left: 15px">
+        <input type="hidden" name="member_id" value=<%= current_member.id %> >
+        <label class="col-md-4 col-xs-4">お問い合わせ内容</label>
+        <textarea class="input col-md-8 col-xs-8" name="contact" placeholder="お問い合わせ内容を入力してください" rows="3"></textarea>
+      </div>
+
+      <div class="form-group" style="margin-left: 15px">
+        <input class="btn btn-material-pink" type="submit" value="送信">
+        <input class="btn btn-material-pink" type="reset" value="キャンセル">
+      </div>
+    </form>
+  </div>
+</div>

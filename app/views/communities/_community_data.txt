@@ -1,0 +1,42 @@
+<table border = '1'>
+  <tr>
+    <td>コミュニティ名:</td><td><%= @community.name %></td>
+  </tr>
+  <tr>
+    <td>説明:</td><td><%= @community.try(:description) %></td>
+  </tr>
+  <tr>
+    <td>コミュニティイメージ:</td><td><img src="/images/<%= @community.try(:image) %>" alt="" /></td>
+  </tr>
+  <tr>
+    <td>コミュニティ参加者:</td>
+    <!--ここは複数系じゃないといけない-->
+    <% @community.members.each do |member| %>
+      <tr>
+      <td><%= member.name %></td>
+      </tr>
+    <% end %>
+  </tr>
+</table>
+
+<%= link_to '編集', edit_community_path(@community) %>
+
+<%= render 'community_comments' %>
+
+<% if @community_comments.present?  %>
+  <% @community_comments.each do |comment| %>
+
+    名前: <%= comment.member.name %>  <br />
+    コメント: <%= comment.comment %><br />
+    <img src="/images/<%= comment.image %>" alt="" />
+
+  <% end %>
+<% end %>
+
+
+<style media="screen">
+img {
+width: 200px;
+height: 150px;
+}
+</style>

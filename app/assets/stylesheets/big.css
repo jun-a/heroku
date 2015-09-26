@@ -1,0 +1,437 @@
+/*902以上の場合*/
+
+@media screen and (min-width: 902px) {
+  /**全体html**/
+  html {
+    width: 100%;
+    height: 100%;
+  }
+  /**背景画像の設置**/
+  body {
+    background-image: url("https://rejob.co.jp/wp-content/themes/simplicity/images/recruit/sakura.jpg");
+    /* 全体の背景画像 */
+    background-repeat: no-repeat;
+    /* 背景を繰り返さない */
+    background-position: 50% 50%;
+    /* 背景画像の位置は画面中央 */
+    background-attachment: fixed;
+    /* 背景画像を固定する */
+    background-size: cover;
+  }
+  /**nav-barの設置**/
+  .navbar-default {
+    background-color: #ff82b2 !important;
+    border-color: #ff82b2;
+  }
+  .navbar-default .navbar-nav > li > a {
+    color: white;
+  }
+  /* Also don't forget to change the hover styles as well*/
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: pink;
+    background-color: #ff82b2 !important;
+  }
+  /* And the brand colour*/
+  .navbar-default .navbar-brand {
+    color: pink;
+  }
+  /*サイト全体のコンテンツ画面自体を中央寄せ*/
+  .container {
+    margin: 0 auto;
+    width: 900px;
+  }
+
+  /*チュートリアル*/
+  .nav-tabs {
+    background-color: #ff82b2;
+    padding: 1%;
+  }
+  .tab-content {
+    padding: 2%;
+  }
+  /*top_page*/
+  .logo {
+    margin-top: 10%;
+    margin-bottom: 3%;
+    text-align: center;
+  }
+  .search {
+    text-align: center;
+  }
+  .searchitem {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .search_name {
+    width: 90%;
+  }
+  .navi ul li {
+    display: inline;
+    margin: 2%;
+  }
+  .navi {
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
+  }
+  .newstelp {
+    margin-top: 3%;
+    text-align: center;
+  }
+  .navi li {
+    border-radius: 3px;
+    padding: 1%;
+  }
+  /**panelの設置**/
+  .panel-body {
+    width: 94%;
+    padding: 3%;
+    margin-left: 50px;
+    margin-top: 2%;
+  }
+  .panel-left {
+    width: 60%;
+    margin-left: 2%;
+    float: left;
+  }
+  .panel-right {
+    width: 35%;
+    float: left;
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+  .panel-head {
+    width: 100%;
+    /*ページ全体の横幅*/
+    margin: 0 auto;
+    /*真ん中配置は左右のmarginをautoで指定します。*/
+  }
+  .panel-bottom {
+    clear: both;
+    /*フッターでfloatを解除します。*/
+    width: 90%;
+    margin-left: 1%;
+  }
+  .panel-whole-top {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  /*article*/
+  ol {
+    padding: 0;/* paddingキャンセル */
+    margin: 0;/* marginキャンセル */
+    list-style: none;/* olがはき出す数字を消す */
+    counter-reset:li; /* 数字のカウントをリセットする */
+    }
+ol li:before{
+  /* カウンタ（数字になる部分） */
+  counter-increment: li; /* 任意の名前を付けて！ */
+  content: counter(li); /* 名前を付けたカウンターを呼び出し */
+  float: left;
+  background: silver;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+}
+figure {
+	position: relative;
+	overflow: hidden;
+	width: 150px;
+  height: 150px;
+}
+figcaption {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.6);
+	-webkit-transition: .3s;
+	transition: .3s;
+	opacity: 0;
+  text-align: center;
+  color: white;
+}
+figure:hover figcaption {
+	opacity: 0.7;
+}
+
+  /*communities*/
+  .community_show {
+    margin-left: 7px;
+  }
+  .community_show img {
+    width: 200px;
+    height: 100px;
+  }
+  .comments {
+    padding-left: 50px;
+    overflow: hidden;
+  }
+  a:hover {
+    color: #ff82b2;
+  }
+  .communitypost {
+    padding-top: 20px;
+    margin: 0;
+    overflow: hidden;
+  }
+  .communityimage {
+    text-align: center;
+  }
+  .communityimage img {
+    width: 750px;
+    height: 300px;
+  }
+  .content {
+    padding-left: 50px;
+    padding-top: 30px;
+  }
+  .community_index {
+    float: left;
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+  .community_form {
+    margin-top: 50px;
+  }
+  .form-group {
+    overflow: hidden;
+  }
+  /*ファイルを選択の装飾*/
+  .uploadButton {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    background-color: #FCE4EC;
+    color: #E91E63;
+    text-align: center;
+    padding: 1%;
+    cursor: pointer;
+  }
+  .uploadButton:hover {
+    background: #FCE4EC;
+  }
+  .uploadButton input[type=file] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .uploadValue {
+    display: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    padding: 3px;
+    color: #ffffff;
+  }
+  /*members*/
+  .profile {
+    margin-left: 10%;
+  }
+  .profile_image {
+    margin-right: 0;
+  }
+  .profile_image img {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+  }
+  .mdi-action-favorite {
+    color: #ff82b2;
+  }
+  .search_word {
+    text-align: center;
+  }
+  .result {
+    text-align: center;
+    margin-top: 5%;
+  }
+  .result a:hover {
+    color: #ff82b2;
+  }
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+  .profileimage {
+    padding-left: 70px;
+  }
+  .profile_message {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #EEE;
+    border-radius: 3px;
+    margin-top: 20px;
+  }
+  .search_box {
+    text-align: center;
+  }
+  .input {
+    width: 90%;
+  }
+  /*news*/
+  .news {
+    margin-top: -2%;
+  }
+  .status {
+    text-align: center;
+  }
+  .reply {
+    width: 90%;
+  }
+  .title {
+    width: 90%;
+  }
+  .news_content {
+    width: 90%;
+  }
+  /* chats/index*/
+  .chat_image {
+    width: 50px;
+    height: 50px;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+  .chat {
+    text-align: center;
+    margin: 3%;
+  }
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+  /*ふきだし*/
+  #balloon-4-top-left {
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    width: auto;
+    min-width: 115px;
+    height: 70px;
+    color: black;
+    line-height: 70px;
+    text-align: center;
+    background: #FFD5EC;
+    border-radius: 60%;
+    margin-top: 15px;
+  }
+  #balloon-4-top-left:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #FFD5EC;
+    border-radius: 30px 0 30px 0;
+  }
+  #balloon-4-top-left:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #ff82b2;
+    border-radius: 30px 0 30px 0;
+    z-index: -1;
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+  .mdi-social-whatshot {
+    color: red;
+  }
+  /*topページ*/
+  #main {
+    width: 90%;
+    margin-top: 200px;
+  }
+  .top {
+    margin-left: 45%;
+    text-align: center;
+  }
+  /*my_page*/
+  .panel-whole-top {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  .panel-whole-down {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+  .index_content {
+    margin-left: 6%;
+    background-color: #fff;
+  }
+  .members_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+    float: left;
+  }
+  .index_image {
+    margin-left: 8px;
+  }
+  .wrapper {
+    margin: 0;
+    padding: 0;
+  }
+  .dropdown {
+    margin: 0;
+    padding: 0;
+  }
+  .profile {
+    margin-left: 15%;
+  }
+  .profile_image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  .index_top_image {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .index_top_image img {
+    width: 80px;
+    height: 80px;
+  }
+  .community {
+    margin-right: 2%;
+    width: 100%;
+  }
+  .communiy_image {
+    margin-left: 7px;
+  }
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+  .panel-heading a:hover {
+    color: #ff82b2;
+  }
+  /*my_pageのnews*/
+  .panel-news-list li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 10px;
+  }
+}

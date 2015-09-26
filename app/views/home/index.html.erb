@@ -1,0 +1,484 @@
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<script type="text/javascript">
+$.fn.autoChange = function(config) {
+   // オプション
+   var options = $.extend({
+      effect  : 'fade',
+      type    : 'repaet',
+      timeout : 3000,
+      speed   : 1000
+   }, config);
+
+   return this.each(function() {
+      // カウンター初期化
+      var current = 0;
+      var next = 1;
+
+      // 指定した要素の子要素を取得
+      var element = $(this).children();
+
+      // 全ての要素を非表示にする
+      $(element).hide();
+
+      // 最初の要素だけ表示する
+      $(element[0]).show();
+
+      // 要素を切り替えるスクリプト
+      var change = function(){
+         // フェードしながら切り替える場合
+         if (options.effect == 'fade') {
+            $(element[current]).fadeOut(options.speed);
+            $(element[next]).fadeIn(options.speed);
+
+         // スライドしながら切り替える場合
+         } else if  (options.effect == 'slide') {
+            $(element[current]).slideUp(options.speed);
+            $(element[next]).slideDown(options.speed);
+         }
+
+         // リピートする場合
+         if (options.type == 'repeat') {
+            if ((next + 1) < element.length) {
+                current = next;
+                next++;
+            } else {
+                current = element.length - 1;
+                next = 0;
+            }
+         }
+
+         // 最後の要素でストップする場合
+         if (options.type == 'stop') {
+            if ((next + 1) < element.length) {
+                current = next;
+                next++;
+            } else {
+                return;
+            }
+         }
+      };
+
+      // 設定時間毎にスクリプトを実行
+      var timer = setInterval(function(){change();}, options.timeout);
+   });
+};
+
+
+// 自動切り替えする要素の設定
+$(function() {
+   $('#sample1').autoChange({effect : 'fade', type : 'stop', timeout: 3000, speed : 1000});
+   $('#sample2').autoChange({effect : 'fade', type : 'repeat', timeout: 3000, speed : 1000});
+   $('#sample3').autoChange({effect : 'slide', type : 'repeat', timeout: 3000, speed : 1000});
+   $('#sample4').autoChange({effect : 'slide', type : 'stop', timeout: 3000, speed : 1000});
+});
+
+</script>
+<ul id="sample2" class="text" style="list-style-type: none;">
+  <% @rejobook_news.reverse_each do |news|  %>
+  <li>
+    [<%= news.department.name %>]<%= link_to "#{news.title}", news_path(news.id) %>
+  </li>
+  <% end %>
+</ul>
+
+<!--ここからがパネル部分-->
+<!--下記navbar部分-->
+<%= render template: 'layouts/_nav_bar' %>
+
+<div class="error" style="margin-left: 35%">
+  <%= link_to "#{flash[:error]}", edit_member_path(current_member.id),class: "btn btn-flat btn-material-pink" if flash[:error].present? %>
+</div>
+<!--テロップ記載部分-->
+<div class="panel-whole-top">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="panel-news-list">
+        <div id="news">
+          <div class="icon-preview">
+            <i class="mdi-notification-sms"></i>
+            <span>&nbsp;REJOB NEWS</span>
+          </div>
+          <ul>
+            <% @rejobook_news.reverse_each do |news|  %>
+            <li>
+              [<%= news.department.name %>]<%= link_to "#{news.title}", news_path(news.id) %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<!--ここはtop左側の社員一覧-->
+  <div class="panel-whole-left">
+    <div class="panel panel-default panel-left">
+      <div class="index_content panel-body">
+        <div class="row">
+          <div class="icon-preview">
+            <i class="mdi-social-group"></i>
+            <span>&nbsp;REJOB一覧</span>
+          </div>
+
+          <% @members.each do |member| %>
+          <div class="members_index panel panel-default col-lg-4">
+            <div class="index_top_image panel-body">
+<!--プロフィール写真を反映-->
+              <%= image_tag member.image.url, :size => "150x150" if member.image.present? %>
+            </div>
+            <div class="panel-footer">
+<!--名前とchatwork_idとメインの部署を反映-->
+              <%= link_to "#{member.name}", member_path(member.id) %>
+              <br>
+              <%= member.chatwork_id %>
+              <br>
+              <%= member.main_department.name if member.main_department.present? %>
+            </div>
+          </div>
+          <% end %>
+          <div class="more row">
+            <div class="col-lg-3">
+              <%= link_to 'more', members_path, class: 'btn btn-flat btn-material-pink' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel-whole-right">
+<!--ここはtop右側-->
+<!--検索ボックス-->
+<!--検索ボックス-->
+  <div class="panel panel-default panel-right">
+    <div class="search_box panel-body">
+        <h4 class="search">REJOB検索</h4>
+        <%= search_form_for @search, url: my_page_home_path(params[:q]) do |f| %>
+
+        <div class="form-group">
+          <%= f.label :name_cont, '名前', class: "control-label" %>
+          <% if params[:q].present? %>
+            <% if params[:q][:name_cont].present? %>
+              <%= f.search_field :name_cont, :placeholder => "#{params[:q][:name_cont]}", class: "form-control", rows: "3" %>
+            <% else %>
+              <%= f.search_field :name_cont, class: "form-control", rows: "3" %>
+            <% end %>
+          <% else %>
+              <%= f.search_field :name_cont, class: "form-control", rows: "3" %>
+          <% end %>
+        </div>
+
+
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <%= f.label :department, '所属部署' %>
+                <br>
+                <% if params[:q].present? %>
+                  <% if params[:q][:departments_id_in].present? %>
+                    <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :selected => params[:q][:departments_id_in], :include_blank => true %>
+                  <% else %>
+                    <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+                  <% end %>
+                <% else %>
+                  <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+                <% end %>
+              </label>
+            </div>
+          </div>
+
+<!--部署がDBから出てくるようにする-->
+      <div class="profiletable form-group">
+        <div class="search col-lg-12">
+          <%= f.submit "検索", class: "btn btn-flat btn-material-pink" %>
+          <br>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="profiletable">
+      <div class="result">
+        <h4>検索結果</h4>
+        <% @results.each do |result| %>
+        <br>
+        name:
+        <%= link_to "#{result.name}", member_path(result.id) %>
+        <br>
+        chatwork_id:
+        <%= result.chatwork_id %>
+        <br>
+        ----------------------
+        <br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+    <div class="panel panel-default panel-right">
+      <div class="panel-body" style="
+      width: 95%;
+      padding: 3%;
+      margin-left: 5px
+      margin-right: -10px
+      ">
+        <div class="icon-preview">
+          <i class="mdi-social-group"></i>
+          <span>&nbsp;コミュニティ一覧</span>
+        </div>
+        <div class="community row">
+          <% @random_communities.each do |community| %>
+          <div class="community_index panel panel-default col-lg-4">
+            <div class="panel-heading">
+              <%= link_to "#{community.name}", community_path(community.id) %>
+            </div>
+            <div class="communiy_image panel-body">
+              <%= image_tag community.image.url, :size => "100x50" if community.image.present? %>
+            </div>
+            <div class="communiy_image panel-body">
+              参加者<br>
+<!--ここは複数系じゃないといけない-->
+              <% community.members.each_with_index do |member, count| %>
+              <% if count >= 3
+                      break
+                  end %>
+              <%= image_tag member.image.url, :size => "30x30" if member.image.present? %>
+              <%= member.name %><br>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="more row">
+          <div class="form-group">
+            <div class="col-lg-3">
+              <%= link_to 'more', communities_path, class: 'btn btn-flat btn-material-pink' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="panel-whole-down">
+      <!--top左側の社員間チャットの表示は以下-->
+              <div class="panel panel-default">
+                <div class="panel-body" style="margin-left: 11%">
+                  <div class="icon-preview">
+                    <i class="mdi-social-mood"></i>
+                    <span>&nbsp;みんなのメッセージ</span>
+                  </div>
+                  <% @member_messages.each do |message| %>
+                  <div class="panel panel-default col-lg-3" style="margin-right: 30px">
+                    <div class="chat panel-body">
+      <!--ここに送り主の画像-->
+                        <% if message.from_member.image.present? %>
+                        <%= image_tag message.from_member.image.url, :size => "50x50" %>
+                        <% else %>
+                        <%= message.from_member.name %>
+                        <% end %>
+      <!--ここにアイコン-->
+                      <i class="<%= message.message_icon.try(:icon) %>"></i>
+      <!--ここに受け取り主の画像-->
+                        <% if message.to_member.image.present? %>
+                        <%= image_tag message.to_member.image.url, :size => "50x50" %>
+                        <% else %>
+                        <%= message.to_member.name %>
+                        <% end %>
+      <!--ここに送るメッセージ-->
+                      <div id="balloon-4-top-left">
+                        <%= message.message %>
+                      </div>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+
+<!--設定部分開始-->
+
+
+<!--ここはクリック時に影がでる挙動のjs-->
+<script>
+  $(document).on("click", "#shadow-flash, #shadow-sample3", function () {
+    var tap = ($(this).data("tap") * 1) + 1;
+    if (tap === 6) {
+      tap = 0;
+    }
+    $(this).data("tap", tap);
+    var shadow = "shadow-z-" + tap;
+    $(this).attr("class", shadow);
+  });
+</script>
+
+<!--ここからdropdownの開始するjs-->
+<script>
+  $(document).ready(function () {
+  // This command is used to initialize some elements and make them work properly
+    $.material.init();
+  });
+</script>
+
+
+
+<script>
+  (function () {
+
+    var $button = $("<div id='source-button' class='btn btn-primary btn-xs'>&lt; &gt;</div>").click(function () {
+      var index = $('.bs-component').index($(this).parent());
+      $.get(window.location.href, function (data) {
+        var html = $(data).find('.bs-component').eq(index).html();
+        html = cleanSource(html);
+        $("#source-modal pre").text(html);
+        $("#source-modal").modal();
+      })
+    });
+
+    $('.bs-component [data-toggle="popover"]').popover();
+    $('.bs-component [data-toggle="tooltip"]').tooltip();
+
+    $(".bs-component").hover(function () {
+      $(this).append($button);
+      $button.show();
+    }, function () {
+      $button.hide();
+    });
+
+    function cleanSource(html) {
+      var lines = html.split(/\n/);
+
+      lines.shift();
+      lines.splice(-1, 1);
+
+      var indentSize = lines[0].length - lines[0].trim().length,
+        re = new RegExp(" {" + indentSize + "}");
+
+      lines = lines.map(function (line) {
+        if (line.match(re)) {
+          line = line.substring(indentSize);
+        }
+
+        return line;
+      });
+
+      lines = lines.join("\n");
+
+      return lines;
+    }
+
+    $(".icons-material .icon").each(function () {
+      $(this).after("<br><br><code>" + $(this).attr("class").replace("icon ", "") + "</code>");
+    });
+
+  })();
+</script>
+
+<script>
+  $(function () {
+    $.material.init();
+    $(".shor").noUiSlider({
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+
+    $(".svert").noUiSlider({
+      orientation: "vertical",
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+  });
+</script>
+
+<!--テロップを出すためのjs-->
+<script type="text/javascript">
+  $.fn.tvCredits = function (e) {
+    return this.each(function () {
+      var t = {
+        direction: "up",
+        complete: function () {},
+        speed: 25e3,
+        height: 350
+      };
+      var n = $.extend(t, e),
+        r = $(this),
+        i = r.find("ul"),
+        s = i.children(),
+        o = n.speed,
+        u = 0,
+        a;
+      var f = function (e, t) {
+        if (n.direction == "left") {
+          i.css("margin-top", 0);
+          i.css("margin-bottom", 0);
+          if (e == 0) {
+            r.css("display", "block");
+            i.css("display", "inline-block");
+            s.css("display", "inline");
+            t = 0;
+            s.each(function () {
+              t += $(this).innerWidth()
+            });
+            t += t;
+            var u = i.innerWidth();
+            if (u < t) {
+              i.css("width", t + "px")
+            }
+          }
+          i.css("margin-left", "100%");
+          a = {
+            "margin-left": "-" + t + "px"
+          };
+          e++
+        } else {
+          var l = n.height;
+          r.css("height", n.height + "px");
+          i.css("margin-top", l - l * .2 +
+            "px");
+          i.css("margin-bottom", "-" + l + "px");
+          if (e == 0) {
+            r.css("display", "table");
+            i.css("display", "block");
+            s.css("display", "block");
+            i.css("margin-left", 0);
+            i.css("width", "90%")
+          }
+          var c = 0;
+          s.each(function () {
+            c += $(this).height()
+          });
+          i.css("height", l);
+          a = {
+            "margin-top": "-" + c * 2 + "px"
+          };
+          e++
+        }
+        i.animate(a, o, "linear", function () {
+          n.complete();
+          f(e, t)
+        })
+      };
+      f(u, null)
+    })
+  }
+</script>
+
+<script>
+  $("#news").tvCredits({
+    direction: 'left',
+    speed: 60000
+  });
+</script>

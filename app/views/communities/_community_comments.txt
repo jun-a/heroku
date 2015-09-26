@@ -1,0 +1,15 @@
+<%= form_for @comment  do |f|  %>
+
+<%= f.label :comment, 'コメント' %> <br>
+<%= f.text_area :comment  %>  <br>
+
+<%= f.label :image, '写真' %> <br>
+<%= f.file_field :image %>
+
+<!--ここに初期値としてcommunity_idを設置＆viewに出力しなければオッケー-->
+
+Are you OK for post?  <%= check_box_tag 'id', @community.id %> <br>
+
+<%= f.submit  '投稿' %>
+
+<% end %>

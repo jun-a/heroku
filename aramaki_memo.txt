@@ -1,0 +1,153 @@
+チャット一覧のリンク化
+
+            <%= button_to  @join_member.present?  ? '不参加' : '参加', class: 'btn btn-flat btn-material-pink' %>
+
+========================active log========================
+6/22
+communityのviewとcontrollerとmodelとtableの作成
+admin_userの作成→model と viewの作成
+
+6/23
+fav機能の作成
+
+
+6/24
+fav機能の作成
+chatwork  APIを用いたバッチファイルのひな形作成(大石さんファイルを利用)
+community_commentsのcontrollerとviewファイルの作成
+(画像ファイルの調整が必須: string→file_attachment)
+
+
+
+
+
+flash{:notice => 'I18~', {:kind => "Google"}}
+
+puts flash.notice.kind => Google
+
+6/28
+[htmlとerbの結合]
+memberのform部分
+
+[task]
+
+checkboxの分けて出すやり方
+<%= f.collection_check_boxes(:member_ids, Member.all, :id, :name) do |b| %>
+<%= b.check_box { b.check_box + b.text } %>
+<%= b.text  %> <br>
+<!--参加する人をチェックボックスで追加していく-->
+<% end %>
+→ただ、これだとうまくすべてのinputが吐出されない
+
+
+7/10
+<%= f.hidden_field :add_member_id %>
+hidden_fieldいらない気がした←current_memberでよくね？
+
+
+=begin
+    @thanked_member = Member.find(params[:id]).thanked #所定のユーザーのthankedを上位5件取得→並び替えが必要
+    #ここで見るのはモデルのリレーションのthankingとthankedの部分
+    @thanked = @thanked_member.order('created_at DESC').limit(5) #ここのorderは.order(:created_at)かもしれない１
+    #@current_memberの設定＆引き渡しをしてあげる
+    #@current_member ||= Member.find(session["devise.google_data"]) if session["devise.google_data"].present?
+    #自己代入で入れる→本来はここに書くべきではない
+=end
+
+========================memo========================
+
+jsテロップ流しについて
+
+image_fileの格納について
+画像のバイナリファイルをsend_dataを使ってブラウザに表示できるって知れたのは大きい。
+今更ながらファイルの扱いわかってなさすぎてやばいことにも気づいた。
+画像サイズのバリデーションとかはどうやるんだろう…?
+
+<%= image_tag show_image_image_path(@image), class: "large-img" %>
+
+ def show_image
+
+    # send_dataはバイナリファイルをブラウザに表示するため
+    # http://railsdoc.com/references/send_data
+
+    @image = Image.find(params[:id])
+    send_data @image.file, :type => 'image/jpeg', :disposition => 'inline'
+  end
+
+jsで掲示板を作る方法
+www.ohmyenter.com/?p=1137
+
+follow_unfollowの機能作成
+http://railstutorial.jp/chapters/following-users
+[git]
+https://github.com/railstutorial/sample_app_rails_4/tree/master/app
+→relationshipについてのファイルを参照
+
+viewのmore truncate(active_report.content, :length => 40)
+
+
+chatworkについてのバッチ(シェルスクリプト?)を書く際に必要になるであろう
+http://developer.chatwork.com/ja/endpoint_rooms.html#POST-rooms-room_id-messages
+
+
+[ユーザーのランダム表示？]
+
+@user = User.all
+@random = rand(10)
+
+10.times do |time|
+
+@random = rand(10)
+@random_user = @user.find_by(id: @random)
+
+end
+
+@random => view
+
+
+@random_user.each do |user|
+
+
+user.name
+user.image
+
+end
+
+
+[my_communitiesの表示]
+=begin
+    #idはテスト用
+    #所定のユーザーのthankedを上位5件取得→並び替えが必要
+    @thanked_member = Member.login(current_member).thanked
+    #ここで見るのはモデルのリレーションのthankingとthankedの部分
+    @thanked = @thanked_member.order('created_at DESC').limit(5) #ここのorderは.order(:created_at)かもしれない１
+=end
+
+=begin
+    view(home_index)
+    <!--自分が所属しているコミュニティ一覧-->
+    <% @my_communities.each do |community|  %>
+      <%= community.name %>
+    <% end %>
+=end
+
+
+
+==================もともと設定したjs,css部分==================
+
+<!-- Mobile support -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+<link href="css/roboto.min.css" rel="stylesheet">
+<link href="css/material-fullpalette.min.css" rel="stylesheet">
+<link href="css/material.min.css" rel="stylesheet">
+<link href="css/ripples.min.css" rel="stylesheet">
+
+
+<!--テロップjs-->
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="jquery.jstockticker-1.1.js"></script>

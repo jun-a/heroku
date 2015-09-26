@@ -1,0 +1,127 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*ヘッダー
+#header{
+  background-color: #f8f8f8;
+}
+
+.head_container{
+  width: auto;
+  margin: auto;
+}
+
+.heardimage{
+  width: 200px;
+  height: 50px;
+}
+
+.mypage{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.logout{
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/*検索ボックス
+.name_search{
+  width: 200px;
+  margin: 0 auto;
+}
+
+.searchbox{
+  background-color: #f8f8f8;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-width: 5px;
+}
+
+.form-search{
+  text-align: center;
+}
+
+.wrapper{
+  text-align: center;
+}
+
+*/
+
+    /**背景画像の設置**/
+body {
+      background-image: url("https://rejob.co.jp/wp-content/themes/simplicity/images/recruit/sakura.jpg"); /* 全体の背景画像 */
+      background-repeat: no-repeat;            /* 背景を繰り返さない */
+      background-position: 50% 50%;            /* 背景画像の位置は画面中央 */
+      background-attachment:fixed;             /* 背景画像を固定する */
+    }
+
+    /**nav-barの設置**/
+    .navbar-default {
+    background-color: #FF82B2 !important;
+    border-color: #FF82B2;
+  }
+
+
+  .navbar-default .navbar-nav > li > a {
+    color: white;
+  }
+
+
+  // Also don't forget to change the hover styles as well
+
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: pink;
+    background-color: #FF82B2 !important;
+  }
+
+
+  // And the brand colour
+
+  .navbar-default .navbar-brand {
+    color: pink;
+  }
+
+/**panlの設置**/
+.panel-body{
+  width: 90%;
+  padding: 3%;
+}
+
+.panel-left{
+  width: 60%;
+  margin-left: 1%;
+  float: left;
+}
+
+.panel-right{
+  width: 35%;
+  float: left;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.panel-head{
+  width: 100%; /*ページ全体の横幅*/
+  margin: 0 auto; /*真ん中配置は左右のmarginをautoで指定します。*/
+}
+
+.panel-bottom{
+    clear: both;  /*フッターでfloatを解除します。*/
+    width: 90%;
+    margin-left: 1%;
+}
+
+.wrapper{
+  margin: 0;
+  padding: 0;
+}
+.dropdown{
+  margin: 0;
+  padding: 0;
+}

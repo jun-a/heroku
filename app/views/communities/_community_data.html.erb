@@ -1,0 +1,107 @@
+<meta charset="UTF-8">
+
+<!-- Mobile support -->
+<meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+<link href="dist/css/roboto.min.css" rel="stylesheet">
+<link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+<link href="dist/css/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+<link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+
+<body>
+  <div class="container">
+    <div class="panel-head panel panel-default">
+      <div class="panel-body">
+
+        <div class="community_form row">
+          <div class="form-group">
+            <h2 style="text-align: center">
+              <%= @community.name %>
+            </h2>
+          </div>
+
+          <div class="communityimage">
+            <%= image_tag @community.image.url  %>
+<!--コミュニティ画像表示部分-->
+          </div>
+
+            <div class="form-group">
+              <p style="font-weight: bold"><%= @community.try(:description) %></p>
+            </div>
+          <div class="community_members col-md-12 col-xs-12">
+            <p>
+              コミュニティ管理者；<%= link_to @community.member.name, member_path(@community.member.id) if @community.member.present? %>
+            </p>
+<!--参加者の社員個別ページのプロフィール写真が反映-->
+          </div>
+
+          <div class="community_members col-md-12 col-xs-12">
+            <p>
+              コミュニティ参加者
+            </p>
+<!--参加者の社員個別ページのプロフィール写真が反映-->
+            <ul style="list-style: none;">
+
+              <% @community.members.each do |member| %>
+              <li style="float: left">
+                <%= link_to image_tag( member.image.url, :size => "50x50"), member_path(member.id) %><br>
+              </li>
+              <% end %>
+            </ul><br>
+          </div>
+
+          <div class="form-group col-md-12 col-xs-12">
+
+<!--見ているコミュニティへの参加不参加-->
+            <%= form_for(:community, url: community_add_member_path) do |f| %>
+            <%= f.hidden_field 'community_id', :value => params[:id] %>
+            <%= f.hidden_field 'add_member_id', :value => current_member.id %>
+            <br>
+            <%= f.submit @join_member.present?  ? '参加を取りけす' : '参加', class: 'btn btn-material-pink' %>
+            <% end %>
+            <div class="form-group">
+              <%= link_to 'イベントを作成する', new_event_path(params[:community_id] = @community.id ), class:"btn btn-material-pink" %>
+            </div>
+          <div class="form-group">
+            <%= render 'community_comments' %>
+          </div>
+
+          </div>
+
+
+
+        <% @community.community_comments.reverse_each do |comment| %>
+          <div class="comments">
+            <div class="form-group">
+              <div class="coments_pic col-lg-2">
+<!--投稿者の社員個別ページのプロフィール写真が反映-->
+                <%= link_to image_tag(comment.member.image.url, :size => "50x50"), member_path(comment.member.id) %>
+                <br/><%= link_to "#{comment.member.name}", member_path(comment.member.id) %>
+<!--名前はどうする？-->
+              </div>
+              <div class="col-lg-10">
+                <%= comment.comment %>
+                <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+              </div>
+              <div class="col-lg-12" style="text-align: center">
+                <%= image_tag comment.image.url, :size => "250x100" if comment.image_file_name.present?  %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+          <div class="form-group">
+              <%= link_to '編集', edit_community_path(@community), class: 'btn btn-material-grey'  if @join_member.present? || current_member.admin? %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,62 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<div class="container">
+
+  <div class="form-group">
+    <%= link_to '掲示板', news_index_path, class: 'btn btn-material-pink' %>
+  </div>
+
+  <div class="panel-whole-top panel panel-default panel-body" style="margin-bottom: -20px;">
+    <div class="row">
+      <div class="status col-md-3 col-xs-3">
+        <%= link_to image_tag(@rejobook_news.member.image.url, :size => "50x50"), member_path(@rejobook_news.member.id) %>
+        <br>
+        From:<%= link_to "#{@rejobook_news.member.name}", member_path(@rejobook_news.member.id) %>
+      </div>
+      <div class="news col-md-9 col-xs-9">
+        <h3><%= @rejobook_news.title %></h3>
+        <%= @rejobook_news.content %>
+      </div>
+    </div>
+    <%= link_to '編集', edit_news_path(@rejobook_news.id), class: 'btn btn-material-pink' if @rejobook_news.member_id == current_member.id %>
+  </div>
+
+  <!--返信があった場合の表示-->
+    <% @news_comment.each do |comment| %>
+    <div class="panel-whole-top panel panel-default panel-body" style="margin-bottom: -20px;">
+      <div class="row">
+        <div class="status col-md-3 col-xs-3">
+          <%= link_to image_tag(Member.find_by(comment.member_id).image.url, :size => "50x50"), member_path(comment.member_id) %><br>
+          <%= link_to "#{Member.find_by(comment.member_id).name}", member_path(comment.member_id)  %>
+        </div>
+        <div class="col-md-9 col-xs-9">
+          コメントid:<%= comment.news_comment_id %><br/>
+          <%= comment.comment %>
+        </div>
+      </div>
+      <form action="/news/delete_comment/<%= comment.news_comment_id %>/<%= comment.news_id %>" class="form-horizontal" method="get">
+        <input type="submit" value="削除" class="btn btn-material-pink">
+      </form>
+    </div>
+    <% end %>
+
+<!--返信フォーム--->
+  <div class="panel-whole-top panel panel-default panel-body" style="margin-bottom: -20px;">
+    <div class="row">
+      <div class="status col-md-3 col-xs-3">
+        <%= image_tag current_member.image.url, :size => "50x50" %>
+      </div>
+      <div class="col-md-9 col-xs-9">
+        <form action="/news/create_news_comment" class="form-horizontal" method="post">
+          <input type="hidden" name="news_id" value=<%= params[:id] %> >
+          <div class="form-group">
+            <textarea class="reply" name="comment" placeholder="返信内容を入力してください" rows="3"></textarea>
+          </div>
+        </div>
+        <input type="submit" value="送信" class="btn btn-material-pink">
+        <input type="reset" value="キャンセル" class="btn btn-material-grey">
+      </form>
+    </div>
+  </div>
+
+</div>

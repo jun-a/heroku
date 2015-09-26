@@ -1,0 +1,34 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+
+  <div class="container">
+    <div class="icon-preview">
+      <i class="mdi-social-mood"></i>
+      <span>&nbsp;みんなのメッセージ</span>
+    </div>
+
+    <div class="form-group">
+      <%= link_to 'メッセージを伝える', members_path, class: 'btn btn-flat btn-material-pink' %>
+      </div>
+
+    <div class="row">
+      <% @member_messages.each do |message| %>
+      <div class="panel panel-default col-xs-3" style="margin-left: 1%">
+        <div class="chat">
+<!--ここに送り主の画像-->
+        <%= link_to image_tag(message.from_member.image.url, :size => "50x50"), member_path(message.from_member.id) %>
+<!--ここにアイコン-->
+        <i class="<%= message.message_icon.try(:icon) %>"></i>
+<!--ここに受け取り主の画像-->
+        <%= link_to image_tag(message.to_member.image.url, :size => "50x50"), member_path(message.to_member.id) %>
+<!--ここに送るメッセージ-->
+        <div id="balloon-4-top-left">
+          <%= message.message %>
+        </div>
+      </div>
+    </div>
+      <% end %>
+    </div>
+  </div>
+</body>

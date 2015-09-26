@@ -1,0 +1,211 @@
+<head>
+  <meta charset="UTF-8">
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="dist/css/roboto.min.css" rel="stylesheet">
+  <link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+  <link href="dist/css/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container">
+    <%= form_for @member do |f| %>
+
+    <div class="panel panel-default panel-head">
+      <div class="panel-body">
+
+        <div class="content row">
+          <div class="col-md-5 col-xs-5">
+            <label class="control-label" for="inputFile">プロフィール画像</label>
+            <div class="uploadButton">
+              ファイルを選択
+              <input onchange="uv.style.display='inline-block'; uv.value = this.value;" type="file"/>
+              <input class="uploadValue" disabled id="uv" type="text"/>
+<!-- <input type="file" id="inputFile" multiple=""> -->
+              <%= f.file_field :image %>
+              <%= image_tag @member.image.url if @member.image.present? %>
+            </div>
+          </div>
+
+          <div class="col-md-7 col-xs-7">
+            <table>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :name, '名前', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :name, class: 'col-md-8 col-xs-8 input', placeholder: "名前を入力してください"  %>
+                </th>
+              </tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :kana, 'ふりがな', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :kana, class: 'col-md-8 col-xs-8 input', placeholder: "ふりがなを入力してください"  %>
+                </th>
+              </tr>
+
+              <tr>
+              <th class="col-md-4 col-xs-4">
+                <%= f.label :employment_status, '雇用形態' %>
+              </th>
+              <th>
+                    <%= f.collection_select :employment_status_id, EmploymentStatus.all, :id, :name, :prompt => "雇用形態を選択してください" %>
+              </th>
+            </tr>
+
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label '所属部署' %>
+                </th>
+                <th>
+                  <% Department.all.each do |department| %>
+                      <input value="<%= department.id %>" name="member[department_ids][]" id="member_department_ids_<%= department.id %>" type="checkbox"
+                      <% if MembersDepartment.where(member_id: params[:id]).pluck(:department_id).include?(department.id) %>
+                      checked="checked"
+                      <% end %>
+                        >
+                      <label for="member_department_ids_<%= department.id %>"><%= department.name %></label>
+                      <br>
+                  <% end %>
+                </th>
+              </tr>
+
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :job, '業務内容', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :job, class: 'col-md-8 col-xs-8 input', placeholder: "例）解約業務、広告提案"  %>
+                </th>
+              </tr>
+
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :entry_year,'入社年', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.date_select :entry_year, discard_day:"ture",discard_month:"true", class: 'col-md-8 col-xs-8 input'  %>
+                </th>
+              </tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :email, 'E-mail', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :email, class: 'col-md-8 col-xs-8 input', placeholder: "E-mailを入力してください"  %>
+                </th>
+              </tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :chatwork_id, 'Chatwork ID', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :chatwork_id, class: 'col-md-8 col-xs-8 input', placeholder: "Chatwork IDを入力してください", style:"font-size:10px"  %>
+                </th>
+              </tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :indoor_call, '内線番号', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :indoor_call, class: 'col-md-8 col-xs-8 input', placeholder: "内線番号を入力してください"  %>
+                </th>
+              </tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :birthday, '誕生日', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.date_select :birthday, use_month_numbers:"true", default:"", :include_blank => true, :start_year => 1955, class: 'col-md-8 col-xs-8 input'  %>
+                </th>
+              </tr>
+<tr>
+              <th class="col-md-4 col-xs-4">
+                <%= f.label :prefecture_id, '出身地' %>
+              </th>
+              <th>
+                    <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, :prompt => "出身地を選択してください" %>
+              </th>
+</tr>
+              <tr>
+                <th class="col-md-4 col-xs-4">
+                  <%= f.label :hobby, '趣味', class: "control-label" %>
+                </th>
+                <th>
+                  <%= f.text_field :hobby, class: 'col-md-8 col-xs-8 input', placeholder: "例）フットサル、飲み屋探し"  %>
+                </th>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+
+        <div class="content row">
+          <div class="profile_message col-md-12">
+            <%= f.label :profile_message, '自己紹介', class: "col-md-2 control-label" %>
+            <div class="col-md-12">
+              <%= f.text_area :profile_message, class: 'input', placeholder: "好きなもの、特技など自由に入力してください"  %>
+            </div>
+          </div>
+        </div>
+
+        <div class="content row">
+          <div class="form-group">
+            <%= f.submit '保存', class: 'btn btn-material-pink' %>
+            <input class="btn btn-material-grey" type="reset" value="キャンセル">
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </body>
+
+<!--ファイル読み込みの課題-->
+<!--設定部分開始-->
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="stylesheets/roboto.min.css" rel="stylesheet">
+  <link href="stylesheets/material-fullpalette.min.css" rel="stylesheet">
+  <link href="stylesheets/material.min.css" rel="stylesheet">
+  <link href="stylesheets/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="stylesheets/jquery.dropdown.css" rel="stylesheet">
+
+<!--ここからjsの設定部分-->
+  <script src="javascript/jquery-1.10.2.min.js"></script>
+  <script src="javascript/bootstrap.min.js"></script>
+
+  <script src="javascript/ripples.min.js"></script>
+  <script src="javascript/material.min.js"></script>
+  <script>
+$(document).ready(function () {
+// This command is used to initialize some elements and make them work properly
+  $.material.init();
+});
+  </script>
+
+  <style media="screen">
+    .checkbox_container {
+      display: inline;
+      margin-right: 10px;
+    }
+  </style>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <!-- Twitter Bootstrap -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Material Design for Bootstrap -->
+  <link href="dist/css/roboto.min.css" rel="stylesheet">
+  <link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+  <link href="dist/css/ripples.min.css" rel="stylesheet">
+
+  <!-- Dropdown.js -->
+  <link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+
+  <title>Rejoβook</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    'master', media: 'screen' %>
+      <%= javascript_include_tag 'application' %>
+        <%= javascript_include_tag 'master' %>
+          <%= csrf_meta_tags %>
+            <link rel="stylesheet" media="screen and (min-width: 902px)" href="big.css" type="text/css">
+            <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 901px)" href="small.css" type="text/css">
+</head>
+
+<body>
+  <%= yield %>
+</body>
+
+</html>
+
+
+<script>
+  $.material.init();
+</script>
+
+<!--ここはクリック時に影がでる挙動のjs-->
+<script>
+  $(document).on("click", "#shadow-sample2, #shadow-sample3", function() {
+    var tap = ($(this).data("tap") * 1) + 1;
+    if (tap === 6) {
+      tap = 0;
+    }
+    $(this).data("tap", tap);
+    var shadow = "shadow-z-" + tap;
+    $(this).attr("class", shadow);
+  });
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    // This command is used to initialize some elements and make them work properly
+    $.material.init();
+  });
+</script>
+
+<style media="screen">
+  a:hover {
+    color: #FF82B2;
+  }
+</style>

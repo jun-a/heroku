@@ -1,0 +1,43 @@
+<body>
+  <div id="main">
+    <div class="row">
+      <%= image_tag "rejoßook.png", class: "icon col-md-7 col-md-offset-3", alt: "アイコン", height: "150", width: "500"  %>
+      <% if current_member == nil %>
+      <%= link_to 'Start Rejoβook', new_member_session_path, class: "top btn btn-flat btn-material-pink col-xs-3 col-xs-offset-9"   %>
+      <% else %>
+      <%= link_to 'Start Rejoβook', my_page_home_path, class: "top btn btn-flat btn-material-pink col-xs-3 col-xs-offset-9"   %>
+      <% end %>
+    </div>
+  </div>
+</body>
+
+<!--設定部分開始-->
+
+<!-- Mobile support -->
+<meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+<link href="css/roboto.min.css" rel="stylesheet">
+<link href="css/material-fullpalette.min.css" rel="stylesheet">
+<link href="css/material.min.css" rel="stylesheet">
+<link href="css/ripples.min.css" rel="stylesheet">
+<link href="css/roboto.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+<link href="css/jquery.dropdown.css" rel="stylesheet">
+
+<!--ここからjsの設定部分-->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/ripples.min.js"></script>
+<script src="js/material.min.js"></script>
+<script>
+  $(document).ready(function () {
+  // This command is used to initialize some elements and make them work properly
+    $.material.init();
+  });
+</script>

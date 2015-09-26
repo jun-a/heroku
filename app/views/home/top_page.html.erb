@@ -1,0 +1,47 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+
+  <div class="container">
+<!--top_page-->
+    <div class="logo">
+      <img alt="" height="20%" src="images/rejoßook.png" width="60%"/>
+    </div>
+
+    <%= search_form_for @search, url: contact_list_home_path(params[:q]) do |f| %>
+    <div class="searchitem row">
+      <div class="form-group col-md-6 col-xs-6">
+        <%= f.label :name_or_kana_cont, '名前', class: "control-label" %>
+        <% if params[:q].present? %>
+        <% if params[:q][:name_or_kana_cont].present? %>
+        <%= f.search_field :name_or_kana_cont, :placeholder => "#{params[:q][:name_or_kana_cont]}", rows: "3" %>
+        <% else %>
+        <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+        <% end %>
+        <% else %>
+        <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+        <% end %>
+      </div>
+      <div class="form-group col-md-6 col-xs-6" style="text-align: center">
+        <%= f.label :department, '所属部署' %>
+        <br>
+        <% if params[:q].present? %>
+        <% if params[:q][:departments_id_in].present? %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :selected => params[:q][:departments_id_in], :include_blank => true %>
+        <% else %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+        <% end %>
+        <% else %>
+        <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group search">
+      <%= f.submit "連絡先を取得", class: "btn btn-material-pink"%>
+    </div>
+    <% end %>
+
+  </div>
+
+</body>

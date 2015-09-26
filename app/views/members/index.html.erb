@@ -1,0 +1,109 @@
+<head>
+  <meta charset="UTF-8">
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="dist/css/roboto.min.css" rel="stylesheet">
+  <link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+  <link href="dist/css/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+</head>
+
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+  <div class="container">
+
+    <!--検索ボックス-->
+        <div class="panel panel-default panel-whole-top panel-body">
+          <div class="row">
+            <%= search_form_for @search do |f| %>
+
+            <div class="form-group col-md-5 col-xs-5">
+              <%= f.label :name_or_kana_cont, '名前', class: "control-label" %>
+              <br>
+              <% if params[:q].present? %>
+              <% if params[:q][:name_or_kana_cont].present? %>
+              <%= f.search_field :name_or_kana_cont, :placeholder => "#{params[:q][:name_or_kana_cont]}", rows: "3" %>
+              <% else %>
+              <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+              <% end %>
+              <% else %>
+              <%= f.search_field :name_or_kana_cont, class: "search_name", placeholder: "検索する名前を入力してください", rows: "3" %>
+              <% end %>
+            </div>
+            <div class="icon-preview col-md-2 col-xs-2" style="margin-top: 3%; text-align: center">
+              <i class="mdi-action-swap-horiz"></i>
+            </div>
+            <div class="form-group col-md-5 col-xs-5">
+              <div class="checkbox">
+                <label>
+                  <%= f.label :department, '所属部署' %>
+                  <br>
+                  <% if params[:q].present? %>
+                  <% if params[:q][:departments_id_in].present? %>
+                  <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :selected => params[:q][:departments_id_in], :include_blank => true %>
+                  <% else %>
+                  <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+                  <% end %>
+                  <% else %>
+                  <%= collection_select :q, :departments_id_in, Department.all, :id, :name, :prompt => "部署を選択してください" %>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+          </div>
+
+            <div class="form-group" style="margin-bottom: -15px; text-align: center">
+                <%= f.submit "検索", class: "btn btn-material-pink" %>
+                <br>
+            </div>
+          <% end %>
+      </div>
+
+<!--ここは社員一覧-->
+    <div class="panel panel-default panel-bottom panel-body">
+      <div class="index_content">
+        <div class="icon-preview">
+          <i class="mdi-social-group"></i>
+          <span>&nbsp;REJOB一覧</span>
+        </div>
+        <div class="row">
+<!--個別のパネルスタート-->
+<!-- メンバーの情報を一人ずつ読み込みます -->
+          <% @results.each do |result| %>
+          <div class="members_index panel col-lg-4">
+            <div class="index_top_image">
+<!--プロフィール写真を反映-->
+            <%= link_to image_tag(result.image.url), member_path(result.id) %>
+
+            </div>
+            <div class="panel-footer">
+          <!--名前と部署を反映-->
+              <%= link_to "#{result.name}", member_path(result.id) %>
+              <br>
+              <%= result.departments.present? ? result.departments.sample(1)[0].name : '無所属'  %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div style="text-align:center">
+          <%= paginate(@results) %>
+        </div>
+
+<!--新規登録部分-->
+        <div class="form-group">
+<!--社員を新規で追加するボタン。_form（社員をnew/editするページ）に遷移-->
+            <a class="btn btn-material-pink" href="https://docs.google.com/spreadsheets/d/1JXuKl8X22o7QhPogdENq4mCZe_pUFotpndVKA0dAJAw/edit#gid=223570573">座席表を確認する</a>
+            <%= link_to '新規登録', new_member_path, class: "btn btn-material-pink" %>
+        </div>
+      </div>
+    </div>
+</body>

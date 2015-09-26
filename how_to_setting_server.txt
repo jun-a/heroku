@@ -1,0 +1,31 @@
+サーバーの設定として、UnicornとNginxを用いる
+
+参考url
+http://qiita.com/Salinger/items/5350b23f8b4e0dcdbe23#unicorn-%E3%81%A8%E3%81%AF
+
+
+下記コマンドで unicorn 起動。
+
+bundle exec unicorn_rails -c config/unicorn.rb -E production -D
+
+起動できているかどうかは下記コマンドで確認できる。
+
+ps -ef | grep unicorn | grep -v grep
+
+Unicorn を止めるには下記のコマンドでプロセスをKillする。
+
+kill -9 [Process ID]
+
+下記のコマンドでUnicornを起動、停止出来るようになる。
+
+$ bundle exec rake unicorn:start
+$ bundle exec rake unicorn:stop
+
+
+ここまでが、unicornの設定
+以下、Nginxについて
+
+まずは、Nginxのインストールfor ubuntu
+http://qiita.com/hiroq/items/420424bc500d89fd1cc8
+
+既存のレポジトリからsudo apt-get installしてもおくれたものしか取れないので、以上のurlのやり方で最新のものをインストール

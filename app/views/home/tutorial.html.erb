@@ -1,0 +1,114 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+
+<div class="container" style="margin-top: 5%; z-index: 2;">
+  <div class="panel panel-default">
+<!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active" role="presentation">
+        <a aria-controls="home" data-toggle="tab" href="#home" role="tab">はじめに</a>
+      </li>
+      <% if current_member.sign_in_count > 1 %>
+      <li role="presentation">
+        <a aria-controls="profile" data-toggle="tab" href="#profile" role="tab">社員の情報を取得する</a>
+      </li>
+      <li role="presentation">
+        <a aria-controls="messages" data-toggle="tab" href="#messages" role="tab">REJOBのコミュニティを見る</a>
+      </li>
+      <li role="presentation">
+        <a aria-controls="settings" data-toggle="tab" href="#settings" role="tab">REJOBのイベントに参加する</a>
+      </li>
+      <% end %>
+    </ul>
+
+<!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="home" role="tabpanel">
+        <h4>REJOBOOKは、リジョブの"人"をもっと知れる場所！</h4>
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0663/1.jpg"/ width="100px" height="100px">
+        あの社員と連絡をとりたいけど、チャットワークや内線番号がわからない…
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0662/1.jpg"/ width="100px" height="100px">
+        よく業務で関わるあの部署の社員さんの名前を知りたいな…
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0227/6.png"/ width="100px" height="100px">
+        リジョブの人と話す機会があるといいな…
+        <br>
+        <h4>リジョブの"人"をもっと知れる、Rejobookはそのきっかけになるサービスです</h4>
+        <% if current_member.sign_in_count == 1 %>
+        <a aria-controls="profile" class="btn btn-material-pink" data-toggle="tab" href="#profile" role="tab">次へ</a>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="profile" role="tabpanel">
+        <h4>社員の名前や所属部署、業務内容、連絡先から、誕生日や趣味までわかる！</h4>
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0663/1.jpg"/ width="100px" height="100px">
+        どうやって検索できるの？
+        <br>
+        1)トップページの検索ボックスから社員情報を取得する
+        <br>
+        2)社員一覧から社員情報を取得する
+        <br>
+        <% if current_member.sign_in_count == 1 %>
+        <a aria-controls="messages" class="btn btn-material-pink" data-toggle="tab" href="#messages" role="tab">次へ</a>
+        <% else %>
+        <%= link_to '社員を見に行く', members_path, class:"btn btn-material-pink" %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="messages" role="tabpanel">
+        <h4>REJOBのコミュニティに行ってみよう！</h4>
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0663/1.jpg"/ width="100px" height="100px">
+        共通の趣味がある人はいないかな？
+        <br>
+        コミュニティ一覧で自分に合うコミュニティを探すことができる！
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0663/1.jpg"/ width="100px" height="100px">
+        REJOBにあるコミュニティにどうしたら参加できるの？
+        <br>
+        「参加」ボタンから、参加表明をしよう！
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0742/1.png"/ width="100px" height="100px">
+        コミュニティの活動記録を残したい！
+        <br>
+        コミュニティページで活動記録を投稿しよう！
+        <br>
+        <% if current_member.sign_in_count == 1 %>
+        <a aria-controls="settings" data-toggle="tab" href="#settings" role="tab" class="btn btn-material-pink">次へ</a>
+        <% else %>
+        <%= link_to 'コミュニティを見に行く', communities_path, class:"btn btn-material-pink" %>
+        <% end %>
+      </div>
+      <div class="tab-pane" id="settings" role="tabpanel">
+        <h4>REJOBで開催されるイベントに参加できる！</h4>
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0986/1.png"/ width="100px" height="100px">
+        リジョブの社員で飲み会をしよう！
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0663/1.jpg"/ width="100px" height="100px">
+        リジョブでどんなイベントがあるのかな？
+        <br>
+        イベント一覧からイベントに「参加」しよう！
+        <br>
+        <img alt="" src="http://pictogram2.com/p/p0227/6.png"/ width="100px" height="100px">
+        飲み会行きたい人いないかな？
+        <br>
+        気軽にイベントを作成して招待しよう！
+        <br/>
+        <% if current_member.sign_in_count == 1 %>
+        <%= link_to 'はじめる', edit_member_path(current_member.id), class:"btn btn-material-pink" %>
+        <% else %>
+        <%= link_to 'REJOBの掲示板を見に行く', events_path, class:"btn btn-material-pink" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group" style="text-align: center; margin-right: 4%">
+    <% if current_member.sign_in_count > 1 %>
+    <%= link_to 'top', top_page_home_path, class:"btn btn-material-pink" %>
+    <% end %>
+  </div>
+</div>

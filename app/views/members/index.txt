@@ -1,0 +1,37 @@
+
+<p>Menbers list</p>
+<!-- メンバーの情報を一人ずつ読み込みます -->
+  <% @members.each do |member| %>
+    <ul>
+    <img src="image/<%= member.image %>" alt="" />
+      <%= member.name %>
+      <%= member.birthday %>
+      　<%# image0.jepg %>
+      <!-- そのメンバーの部署を１つずつ読み込みます -->
+      <% member.departments.each do |department| %>
+            <li><%= department.name%></li>
+      <% end %>
+      <%= link_to 'Edit', edit_member_path(member) %>
+      <%= link_to 'Delete', member_path(member), method: :delete %>
+    </ul>
+  <% end %>
+
+<h2>検索</h2>
+<%= search_form_for @search do |f| %>
+
+  <%= f.label :name_cont %>
+  <%= f.search_field :name_cont %>
+  <%= f.label :department, '部署' %>
+  <%= collection_check_boxes(:q, :departments_id_in, Department.all, :id, :name ) %>  <!--ここまで追加-->
+  <div>
+
+    <%= f.submit '検索する' %>
+  </div>
+<% end %>
+
+
+<% @results.each do |result| %>
+
+  <%= result.name %>  <br />
+
+<% end %>

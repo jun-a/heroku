@@ -1,0 +1,31 @@
+<%= render template: 'layouts/_nav_bar' %>
+<div class="container">
+  <div class="panel panel-default">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>タイトル</th>
+                <th>内容</th>
+                <th>メンバー情報</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @news.each_with_index do |news, idx| %>
+            <% if idx % 2 == 0 %>
+            <tr class="success">
+            <% else %>
+            <tr>
+            <% end %>
+                <td><%= news.id %></td>
+                <td><%= news.title %></td>
+                <td><%= news.content %></td>
+                <td><%= news.member_id %></td>
+                <td><%= link_to '詳細', news_path(news.id) %></td>
+                <td><%= link_to '削除', news_path(news.id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+    </table>
+  </div>
+</div>

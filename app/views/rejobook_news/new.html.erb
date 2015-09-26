@@ -1,0 +1,43 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<%= render 'form' %>
+
+<body>
+    <%= form_for @event do |f| %>
+  イベント作成ページ
+  <div class="container">
+    <div class="panel panel-default panel-body">
+
+      <div class="form-group　col-lg-3 control-label">
+        <%= f.label :title, 'イベント名', :class = 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.text_field :title, class: 'title', placeholder: '例:第1回○○会！など' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :content, '概要', class: 'col-lg-3 control-label' %>
+        <div class="col-lg-9">
+          <%= f.text_area :content, class: 'news_content', placeholder: '例:今期の労い会です。〆切は○○日まで！など' %>
+        </div>
+      </div>
+
+      <label class="form-group">
+        参加者を招待する
+      </label>
+      <div class="btn btn-material-grey">全員を招待</div>
+      ※社員が出てきて、チェックボックスで選択できる
+      <div class="btn btn-material-pink">招待を送る</div>
+
+      <div class="form-group">
+        <a href="https://chouseisan.com/" class="btn btn-material-pink" target=”_blank”>日程を調整する</a>
+      </div>
+
+        <%= f.submit '作成', class: 'btn btn-material-pink' %>
+        <input class="btn btn-material-grey" type="reset" value="リセット">
+        <div class="btn btn-material-grey">キャンセル（/communitiesに戻る）</div>
+
+    </div>
+  </div>
+  <% end %>
+</body>

@@ -1,0 +1,36 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<div class="container">
+  <div class="panel panel-head panel-body panel-default">
+    <div class="icon-preview">
+      <i class="mdi-action-help"></i>
+      <span>シャッフルコミュニティ作成
+        <br>
+        <br>
+        ※ランダムに社員を選択し、コミュニティを作成します
+      </span>
+    </div>
+
+    <form action="/shuffle_community" class="form-horizontal" method="post">
+      <div class="row" style="margin-left: 3%">
+        <div class="form-group">
+          <label>コミュニティ名</label>
+          <input type="text"  class="input col-md-8 col-xs-8" name="name" placeholder="例:きっかけ委員会　など" rows="3">
+        </div>
+        <div class="form-group">
+          <label>コミュニティ説明</label>
+          <textarea class="input col-md-8 col-xs-8" name="numbers" placeholder="例:今月のきっかけ委員会のグループです！など" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>1コミュニティの社員の人数を選択する</label>
+          <input type="number" name="numbers"  value="0">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-left: 3%">
+        <input class="btn btn-material-pink" type="submit" value="シャッフル作成">
+        <input class="btn btn-material-grey" type="reset" value="リセット">
+      </div>
+    </form>
+  </div>
+</div>

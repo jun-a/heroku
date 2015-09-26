@@ -1,0 +1,67 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+  <div class="container">
+    <div class="panel panel-default panel-body">
+<!--タブ-->
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active" role="presentation">
+          <a aria-controls="home" data-toggle="tab" href="#home" role="tab">Today's ピックアップ</a>
+        </li>
+        <li role="presentation">
+          <a aria-controls="profile" data-toggle="tab" href="#profile" role="tab">新着まとめ</a>
+        </li>
+        <li role="presentation">
+          <a aria-controls="messages" data-toggle="tab" href="#messages" role="tab">みんなのイイネ</a>
+        </li>
+        <li role="presentation">
+          <a aria-controls="settings" data-toggle="tab" href="#settings" role="tab">ギャラリー</a>
+        </li>
+      </ul>
+
+<!-- タブのコンテンツ-->
+      <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel">
+          all_indexに遷移
+        </div>
+        <div class="tab-pane" id="profile" role="tabpanel">
+          all_indexに遷移
+        </div>
+        <div class="tab-pane" id="messages" role="tabpanel">
+          <!--記事表示-->
+          <ol>
+          <li class="list-group">
+            <div class="list-group-item">
+              <div class="row-picture">
+                <img alt="icon" class="" src="http://lorempixel.com/56/56/people/1">
+              </div>
+              <div class="row-content">
+                <h4 class="list-group-item-heading">タイトル</h4>
+                <p class="list-group-item-text">テキスト</p>
+              </div>
+            </div>
+            <div class="list-group-separator"></div>
+          </li>
+          <li class="list-group">
+            <div class="list-group-item">
+              <div class="row-picture">
+                <img alt="icon" class="" src="http://lorempixel.com/56/56/people/1">
+              </div>
+              <div class="row-content">
+                <h4 class="list-group-item-heading">タイトル２</h4>
+                <p class="list-group-item-text">テキスト２</p>
+              </div>
+            </div>
+            <div class="list-group-separator"></div>
+          </li>
+          <!--記事表示-->
+        </ol>
+        </div>
+        <div class="tab-pane" id="settings" role="tabpanel">
+          all_indexに遷移
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>

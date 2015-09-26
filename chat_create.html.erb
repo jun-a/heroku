@@ -1,0 +1,24 @@
+<%= form_for @chat, controller: :chats, action: :chat_create do |f|  %>
+<div class="communitypost row breadcrumb">
+  <div class="form-group">
+    <%= f.label :comment, 'メッセージ', class: "col-lg-2 control-label" %>
+    <div class="col-lg-10">
+      <%= f.text_field :message, class: "form-control", rows: "3"  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-10">
+      <div class="form-control-wrapper fileinput">
+      <li><%= f.collection_select :message_icon_id, MessageIcon.all, :id, :category, :prompt => "伝えたい気持ちを選んで！" %></li>
+    </div>
+  </div>
+</div>
+</div>
+<!--ここに初期値としてcommunity_idを設置＆viewに出力しなければオッケー-->
+<%= f.hidden_field 'id', :value => Member.first.id %>
+<div class="row">
+<div class="post col-lg-3">
+  <%= f.submit '投稿', class: 'btn btn-flat btn-material-pink' %>
+</div>
+</div>
+<% end %>

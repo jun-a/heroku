@@ -1,0 +1,30 @@
+<%= render template: 'layouts/_nav_bar' %>
+
+<div class="container">
+  <div class="news_btn">
+    <%= link_to '投稿', new_news_path,  class: 'btn btn-material-pink col-xs-3　col-xs-offset-9' %>
+  </div>
+
+  <% @rejobook_news.reverse_each do |news| %>
+
+  <div class="panel-whole-top panel panel-default panel-body" style="margin-bottom: -20px;">
+    <div class="row">
+      <div class="status col-md-3 col-xs-3">
+        <%= link_to image_tag(news.member.image.url, :size => "50x50"), member_path(news.member.id) %>
+        <br>
+        From:<%= link_to "#{news.member.name}", member_path(news.member.id) %>
+      </div>
+      <div class="news col-md-9 col-xs-9">
+        <h3><%= link_to "#{news.title}", news_path(news.id) %></h3>
+        <%= news.content %>
+        <br>
+        <i class="mdi-content-reply" style="margin-top: 1%; font-size: 15px;"><%= link_to "返信", news_path(news.id) %></i>
+        コメント数: <%= news.news_comments.count %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div style="text-align:center">
+    <%= paginate(@rejobook_news) %>
+  </div>
+</div>

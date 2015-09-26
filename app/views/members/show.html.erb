@@ -1,0 +1,139 @@
+<%= render template: 'layouts/_nav_bar' %>
+<!--単純な各カラムについてはnilでも出力してオッケー--->
+<body>
+  <div class="container">
+    <div class="panel-body panel panel-default">
+
+      <%= render 'relation_members', this_member: @member %>
+
+      <div class="content col-md-12 col-xs-12 row">
+        <div class="profile_image col-md-5 col-xs-5">
+<!--ここにアップロードされたプロフィール写真-->
+          <%= image_tag @member.image.url %>
+<!--以下座席表のリンク-->
+          <div class="form-group">
+            <a class="btn btn-material-pink" href="https://docs.google.com/spreadsheets/d/1JXuKl8X22o7QhPogdENq4mCZe_pUFotpndVKA0dAJAw/edit#gid=223570573" target=”_blank”>座席を確認</a>
+<!--編集ボタン表示の設定-->
+            <%= link_to '編集', edit_member_path(@member.id), class: "btn btn-material-grey" if @member.id == current_member.id || current_member.admin? %>
+          </div>
+        </div>
+
+        <div class="profiletable col-md-6 col-xs-6">
+          <table>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputname">
+                名前
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:name) %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputkana">
+                ふりがな
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:kana) %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputdepartsment">
+                部署
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <% @member.main_department.name if @member.main_department.present? %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputjob">
+                業務内容
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:job) %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputjob">
+                出身地
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.prefecture.name if @member.prefecture.present? %>
+              </th>
+            </tr>
+
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputentry_year">
+                入社年
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.entry_year.strftime("%Y年度") if @member.entry_year.present?%>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4control-label" for="inputEmail">
+                E-mail
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.email %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputchatwork_id">
+                Chatwork ID
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:chatwork_id) %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputindoor_call">
+                内線番号
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:indoor_call) %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputbirthday">
+                誕生日
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.birthday.strftime("%m月 %d日") if @member.birthday.present?  %>
+              </th>
+            </tr>
+            <tr>
+              <th class="col-md-4 col-xs-4 control-label" for="inputhobby">
+                趣味
+              </th>
+              <th class="col-md-8 col-xs-8">
+                <%= @member.try(:hobby) %>
+              </th>
+            </tr>
+          </table>
+
+          <div class="profile_message col-md-12 col-xs-12">
+            <label class="col-md-4 col-xs-4 control-label" for="textArea">自己紹介</label>
+            <div class="col-md-12 col-xs-12">
+              <%= @member.try(:profile_message) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group" style="font-weight: bold">参加コミュニティ</div>
+<!-- 参加しているコミュニティが反映されて、クリックすればそのコミュニティの詳細ページにいける-->
+            <% if @member.communities != nil %>
+            <% @member.communities.each do |community| %>
+            <div style="float: left; margin: 1%">
+              <%= link_to image_tag(community.image.url, :size => "50x50"), community_path(community.id) %><br>
+              <%= link_to "#{community.name}", community_path(community.id) %>
+          </div>
+            <% end %>
+            <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>

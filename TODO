@@ -1,0 +1,211 @@
+
+========================Todo========================
+【残タスク】
+バック
+・テロップ機能・表示作成
+http://solidstate.jp/ContentsDisplay/NewsTicker/script_171.html
+・googleのlogin機能を実装した際の承認フローの計画
+・デバック・洗い出した条件分岐の実装
+・コミュニティに参加するをおしたら参加者に追加される&個人の詳細ページにも反映される機能
+フロント
+・communityの編集のところでメンバーの選択ができない問題→表示されない（チェックボックス問題）（岩崎さんに聞く）
+・dropdownボタンのクリック問題（JS問題）（岩崎さんに聞く）
+・memberのnewでチェックボックス＆dropdownが効かない問題→どちらも部署(css)（JSとチェックボックス問題）（岩崎さんに聞く）
+・nav-barにmember(dropdown)が反映されない問題→loginしていても表示されない(current_member trueの状態で確認済み）（岩崎さんに聞く）
+
+
+
+view にnilが入っていても表示されるようにtry()で対応
+
+
+[active_log]
+#deviseでメンバーの仮登録を行うために、paperclipのmodel&tableを一旦切る
+#googleのlogin機能を実装した際の承認フローの計画
+paginateの設定
+imageを止めている問題
+
+
+[task]
+条件分岐の対応
+#session_controllerの書き直し
+#registerable_controllerの書き直し
+#current_memberのnil問題の対処
+jsの対応(しゅっとなるボタン)
+#layoutの反映設定
+
+chatworkの送信元の設定
+http://developer.chatwork.com/ja/endpoint_rooms.html#POST-rooms-room_id-messages
+
+
+[条件分岐について]
+１）サービスの機能の整理整頓
+現在実装した機能は保持（スプレッドシートのスケジュールに反映されている機能参照）
+追加で、トップページに新着のお知らせテロップ表示機能を作る
+
+２）サービスが動くための条件分岐
+−−−−−−−
+welcome_page →start_rejobook(リンク)
+[not login]
+→session_new
+  [未登録]
+  →registory_new_member
+  →登録後そのmemberの編集画面へ→編集のsubmitボタンでmy_pageへ
+
+[login成功]
+→my_page
+[login失敗]
+→再度session_new or registory_new_member
+
+[already login]
+→my_page
+
+
+[my_page]
+[already login]
+memberの一覧＆検索表示
+communityの更新情報
+chatwork_idの表示
+login中のmemberの表示
+login中のmemberのプロフィールリンク＆communityのリンクをnav-barへ表示
+お知らせテロップの表示
+-------------ここは願望
+chatwork_conntactのボタン表示？
+chatwork_idを叩いてコンタクトのリンクをクリックすると,ログインしているユーザのchatwork_idとコンタクトの依頼文が飛ぶ？(これは厳しいかも)
+----------------------
+[not login]
+communityの更新情報のみ
+nav-barはloginとcommunityとtopのみ
+
+02:52
+
+[members一覧]
+[already login]
+memberの新規orシャッフルされた表示の確認
+検索ボックスが使える
+
+
+[not login]
+→session_newへ(welcome_pageと同じループへ)
+
+[個別のメンバーページ]
+[already login]
+閲覧可能
+thankボタンを押せる
+
+[not login]
+→session_newへ
+
+[admin_login]
+個別のメンバーページにedit_button&destroy_buttonの表示
+
+[edit_member　メンバーの編集部分]
+[already login]
+自分のプロフィール編集が可能→自分のプロフィール編集へリダイレクトされる(たとえidを叩いても)
+
+[not login]
+→session_newへ
+
+[admin_login]
+各メンバー(urlでid確認)の編集&削除が可能
+
+
+[community一覧]
+
+
+[already login]
+各communityが一覧としてチェック可能→リンクにもアクセス可能
+自分のcommunityがどこなのかも表示
+
+[not login]
+communityの一覧の名前＆写真のみ閲覧可能(リンクはなし)
+
+
+[個別のcommunity]
+[already login]
+communityに所属していればcommentフォームが表示される(ここはみんなでもいいかも)
+communityメンバーの顔と名前の表示(リンク付けて)
+
+*そのcommunityのadmin_idを持っているなら編集ボタンの表示(これはデータベースいじる可能性が出てくる)→編集権限の付与は基本adminに申請してもらう
+
+[not login]
+→session_newへ
+
+[admin_login]
+communityのeditボタンの表示
+
+[console only]
+communityの削除はコンソールからのみ
+
+[admin_userの登録は基本、seed or consoleから]
+
+
+=====================activity log=========================
+#各参照ファイルをemployeeからmemberへ変更
+
+#chatworkAPIについてのプラン
+#admin_userの作成→model と viewの作成
+#memberとの結合
+imageのfileタイプの変更
+
+#member_helperのチェック＆修正　ここはdevise_forで生成されるpathの指定
+
+[htmlとerbの結合]
+#memberのform部分
+#member一覧 →検索部分のチェックボックス調整
+#member詳細 →thankボタンの調整&文字が入っていない場合にレイアウトが崩れる問題の解消
+#memberの新規登録→うまくファイルが読み込まれていない部分が多い
+#communiy一覧
+#community詳細
+#communityの登録画面
+#my_page
+#welcome_page(login)
+#admin_user_login部分
+#my_pageのprofile部分の導入→[未解決]favconの読み込みができない&imageが読み込まれない謎のエラー
+
+
+#404のエラーについて
+#リンクのミスについて→名前をクリックしたら、urlのミス
+
+thank_buttontとの機能調整 →うまく読み取れない　<%= button_tag 'ありがとう！', '', @member.thanked,  {'data-id' => @member.id, 'data-from_member_id' => @current_member.id} %>
+画像アップロードの調整
+#user_statusの調整＆start_pageにログインしたら表示されるように →csvサイトからのコピペ
+#検索画面の仕様の練り直し
+
+thankボタンのcheck_box形式をbutton形式に変更
+#deviseを導入すると起る不具合の解消
+login後のredirectの設定→after_log_in_path(resource)メソッドをapplication_controllerに設定してみる
+
+#loginページのボタン部分がsign_in or upになっているので修正
+
+各権限におけるアクセス制限などの設定
+
+→動くものをつくるのではなく、絶対に止まらないものを作る
+
+#scopeメソッドを使って検索条件をつくりcontrollerをシンプルに
+
+
+#backupを取るバッチの作成→ mysql をdumpファイルに落としこむのをrakeに書いてwheneverで実行
+特定のテーブルをdumpファイルに書き換える方法
+http://blog.layer8.sh/ja/2011/12/09/mysqldump%E3%81%A7%E8%A4%87%E6%95%B0%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%82%82%E3%81%97%E3%81%8F%E3%81%AF%E7%89%B9%E5%AE%9A%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96/
+
+
+
+
+バックアップを取るgemを使う
+
+http://kray.jp/blog/dry_with_backup_gem/
+http://vladigleba.com/blog/2014/06/30/backup-a-rails-database-with-the-backup-and-whenever-gems/
+定期的に回すバッチファイル
+http://blog.digital-squad.net/article/145809653.html
+http://morizyun.github.io/blog/whenever-gem-rails-ruby-capistrano/
+
+rake-task
+
+namespace :db do
+  task :backup do
+    system "mysqldump --opt --user=root --password jun910 rejobook_develop> rejobook_backup.sql"
+  end
+end
+
+whenever
+http://shiro-16.hatenablog.com/entry/2015/02/17/000715

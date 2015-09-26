@@ -1,0 +1,52 @@
+<head>
+  <meta charset="UTF-8">
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="dist/css/roboto.min.css" rel="stylesheet">
+  <link href="dist/css/material-fullpalette.min.css" rel="stylesheet">
+  <link href="dist/css/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="dist/css/jquery.dropdown.css" rel="stylesheet">
+</head>
+<%= render template: 'layouts/_nav_bar' %>
+
+<body>
+  <div class="container">
+    <div class="form-group">
+        <%= link_to '新規コミュニティ作成', new_community_path, class: "btn btn-material-pink" %>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="icon-preview">
+          <i class="mdi-social-group"></i>
+          <span>&nbsp;コミュニティ一覧</span>
+        </div>
+        <div class="row">
+            <% @communities.each_with_index do |community, idx| %>
+            <div class="community_index panel" style="margin-right: 16px;">
+              <div class="panel-heading"><%= link_to "#{community.name}", community_path(community.id) %></div>
+              <div class="community_show panel-body">
+                <%= link_to image_tag(community.image.url), community_path(community.id) %><br>
+                <%= truncate("#{community.description}", :omission => "・・・", length: 23) if community.description.present? %>
+                <br>
+                <br>コミュニティ参加者<br>
+                <%= community.members.count %>人
+              </div>
+            </div>
+            <% end %>
+        </div>
+        <div style="text-align:center">
+          <%= paginate(@communities) %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>

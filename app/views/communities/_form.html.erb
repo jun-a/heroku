@@ -1,0 +1,104 @@
+<head>
+  <meta charset="UTF-8">
+
+<!-- Mobile support -->
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+  <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+  <link href="stylesheets/roboto.min.css" rel="stylesheet">
+  <link href="stylesheets/material-fullpalette.min.css" rel="stylesheet">
+  <link href="stylesheets/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+  <link href="stylesheets/jquery.dropdown.css" rel="stylesheet">
+</head>
+
+<body>
+  <%= form_for @community do |f| %>
+  <div class="container">
+    <div class="panel-head panel panel-default">
+      <div class="panel-body">
+
+        <div class="community_form row">
+          <div class="form-group">
+            <label class="col-lg-3 control-label" for="inputFile">コミュニティ画像</label>
+            <div class="uploadButton">
+              ファイルを選択
+              <input onchange="uv.style.display='inline-block'; uv.value = this.value;" type="file"/>
+              <input class="uploadValue" disabled id="uv" type="text"/>
+              <%= f.file_field :image %>
+              
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label  'コミュニティ名', class: "col-md-3 col-xs-3 control-label"  %>
+            <div class="col-md-9 col-xs-9">
+              <%= f.text_field :name, class: "input", placeholder: "コミュニティの名前を入力してください"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label 'コミュニティの説明', class: "col-md-3 col-xs-3 control-label" %>
+            <div class="col-md-9 col-xs-9">
+              <%= f.text_area :description, class: "input", placeholder: "コミュニティの説明を入力してください", rows: "3"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+          <% Member.all.each_with_index do |member, idx| %>
+              <input value=<%= member.id %> name="community[member_ids][]" id="community_member_ids_<%= member.id %>" type="checkbox"
+              <% if MembersCommunity.where(community_id: params[:id]).pluck(:member_id).include?(member.id) %>
+              checked="checked"
+              <% end %>
+              >
+              <label for="community_member_ids_<%= member.id %>" style="margin-right: 10px;"><%= member.name %></label>
+              <% if idx == 7 %>
+              <br>
+              <% end %>
+          <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "保存", class: "btn btn-material-pink" %>
+            <input class="btn btn-material-grey" type="reset" value="リセット">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</body>
+
+<!--設定部分開始-->
+
+<!-- Mobile support -->
+<meta content="width=device-width, initial-scale=1" name="viewport">
+
+<!-- Twitter Bootstrap -->
+<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+
+<!-- Material Design for Bootstrap -->
+<link href="stylesheets/roboto.min.css" rel="stylesheet">
+<link href="stylesheets/material-fullpalette.min.css" rel="stylesheet">
+<link href="stylesheets/material.min.css" rel="stylesheet">
+<link href="stylesheets/ripples.min.css" rel="stylesheet">
+
+<!-- Dropdown.js -->
+<link href="stylesheets/jquery.dropdown.css" rel="stylesheet">
+
+<!--ここからjsの設定部分-->
+<script src="javascript/jquery-1.10.2.min.js"></script>
+<script src="javascript/bootstrap.min.js"></script>
+
+<script src="javascript/ripples.min.js"></script>
+<script src="javascript/material.min.js"></script>
+<script>
+$(document).ready(function () {
+// This command is used to initialize some elements and make them work properly
+  $.material.init();
+});
+</script>

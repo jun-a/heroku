@@ -1,0 +1,132 @@
+<!-- jqueryの機能を使ってthankの制御を行う -->
+  <script type="text/javascript">
+    $(function () {
+      $("input[type=checkbox]").click(function () {
+        $.get('/members/' + $(this).data('id') + '/thanks/' + $(this).data('from_member_id') + '/thank_create') //ルートの設定をthankコントローラをかませた状態でしっかり
+      })
+    })
+  </script>
+
+
+<div class="content row">
+  <div class="thanks nav nav-pills">
+<!--thankボタン部分-->
+    <a href="javascript:void(0)">
+      <i class="mdi-action-favorite"></i>&nbsp;Thank<%= check_box_tag '', '',  @member.thanked,  {'data-id' => @member.id, 'data-from_member_id' => current_member.id} %>&nbsp;
+      <span class="badge">
+        <% if @thanked_member.present? %>
+        <%= @thanked_member.count %>
+        <% else %>
+        0
+        <% end %>
+      </span>
+    </a>
+    <br>
+<!--budgeでthanksされた個数を数えられるようにする-->
+<!--thank部分-->
+    <% if @thanked_member != nil  %>
+    <% @thanked_member.each do |thank| %>
+    <%= thank.name + 'さんがありがとうと言っています' %>
+    <%= thank.created_at %>
+    <br>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+参考記事
+http://qiita.com/youcune/items/ec1d0b34bd542d8c7f2f
+
+予想する流れ
+thanksコントローラーにcreateが実行されるとthankレコードが登録される
+(その際に必要になってくるのが、ログインしているユーザーid(current_user)、ボタンを押した時にto_thankのユーザーid)
+→jsでviewに指定しているボタンのクリックがされたら、actionに飛ぶように設定(ルーティングの設定も)
+→thankレコードの生成
+[表示処理]
+members_controllerにthanksの上位(新着)5件が表示されるように変数の設定
+@thanked_member = Member.find(params[:id]).thanked #所定のユーザーのthankedを上位5件取得→並び替えが必要
+#ここで見るのはモデルのリレーションのthankingとthankedの部分
+@thanked = @thanked_member.order('created_at DESC').limit(5) #ここのorderは.order(:created_at)かもしれない
+
+view
+@thanked.each do |thank|
+  puts  thank.from_user.name + 'さんがありがとうと言っています'
+  puts thank.created_at
+end
+
+<%= #button_tag 'ありがとう！', '', @member.thanked,  {'data-id' => @member.id, 'data-from_member_id' => @current_member.id} %>
+
+メッセージ, '', 変更する指定カラム名, postするidの設定
+
+js
+<!-- jqueryの機能を使ってthankの制御を行う -->
+<script type="text/javascript">
+   $(function() {
+       $("input[type=submit]").click(function() {
+           $.post(+$(this).data('id')+'/create') //ルートの設定をthankコントローラをかませた状態でしっかり
+       })
+   })
+</script>
+
+
+
+controller
+
+  #入金管理の切り替えボタンの設置→このメソッドが実行されたら、pay_doneを反転させる
+  def pay_done_switch
+    render nothing: true  #おそらく、toggleの情報保持のための記載→これを加えないとjsでエラーの表示(postが×)が出る
+    @donation = Donation.find(params[:id]) #donationごとのidを取得後、一致するdonationを変数に入れこむ
+
+    #receipt_of_moneyカラムのtrue false を返す
+    @donation.pay_done = !@donation.pay_done
+    @donation.save
+  end
+
+
+
+  def fav_switch
+    render nothing: true  #おそらく、toggleの情報保持のための記載→これを加えないとjsでエラーの表示(memberが×)が出る
+    @member = Member.find(params[:id]) #フォロー対象のuserの指定
+    @current_user = Member.find_by(id: session[:user_id]) #フォロー元のuserの指定
+
+    #既存の関係をチェック
+    if @member.fav_status.nil?
+      @member.fav_status = ture
+      #SentMarilerアクションで渡す
+    else
+      @member.fav_switch = !@member.fav_switch
+    end
+
+    @member.save
+    redirect_to member_path(@member)
+
+  end
+
+
+view
+statusの表示について
+<%= donation.try(:pay_done) ? '入金済み' : '未入金' %>
+
+switchについて
+<%= check_box_tag  '', '', @donation.pay_done, {'data-id' => @donation.id} %>
+
+
+
+javascript
+
+<!-- jqueryの機能を使ってチェックボックスの制御を行う -->
+<script type="text/javascript">
+    $(function() {
+        $("input[type=checkbox]").click(function() {
+            $.post(+$(this).data('id')+'/pay_done_switch')
+        })
+    })
+</script>
+
+routeing
+post 'donations/:id/pay_done_switch' => 'donations#pay_done_switch'
+
+
+
+#qiitaのn:nテーブルの自己結合について
+  http://qiita.com/youcune/items/ec1d0b34bd542d8c7f2f

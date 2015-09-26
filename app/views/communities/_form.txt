@@ -1,0 +1,31 @@
+<%= form_for @community do |f| %>
+
+  <table>
+
+  <tr>
+  <td><%= f.label  'コミュニティ名'  %></td>
+  <td><%= f.text_field :name %></td>
+  </tr>
+
+  <tr>
+  <td><%= f.label '説明' %></td>
+  <td><%= f.text_area :description %></td>
+  </tr>
+
+  <tr>
+  <td><%= f.label  'プロフィール画像'  %></td>
+  <td><%= f.text_field :image %></td>
+  </tr>
+
+  <tr>
+  <td><%= f.label 'コミュニティ参加者' %></td>
+  <td><%= f.collection_check_boxes :member_ids, Member.all, :id, :name %></td>
+  </tr>
+
+  <tr>
+  <td><%= f.submit "登録" %></td>
+  </tr>
+
+  </table>
+
+<% end -%>

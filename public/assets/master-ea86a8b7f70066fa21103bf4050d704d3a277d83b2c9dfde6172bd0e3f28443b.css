@@ -1,0 +1,865 @@
+@charset "UTF-8";
+@media only screen and (min-width: 902px) {
+  /**全体html**/
+  /* line 3, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  html {
+    width: 100%;
+    height: 100%;
+  }
+
+  /**背景画像の設置**/
+  /* line 9, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  body {
+    background-image: url("https://rejob.co.jp/wp-content/themes/simplicity/images/recruit/sakura.jpg");
+    /* 全体の背景画像 */
+    background-repeat: no-repeat;
+    /* 背景を繰り返さない */
+    background-position: 50% 50%;
+    /* 背景画像の位置は画面中央 */
+    background-attachment: fixed;
+    /* 背景画像を固定する */
+    background-size: cover;
+  }
+
+  /*サイト全体のコンテンツ画面自体を中央寄せ*/
+  /* line 22, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .container {
+    margin: 0 auto;
+    width: 800px;
+  }
+
+  /*sample*/
+  /**nav-barの設置**/
+  /* line 32, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default {
+    background-color: #ff82b2 !important;
+    border-color: #ff82b2;
+  }
+
+  /* line 36, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-nav > li > a {
+    color: white;
+  }
+
+  /* Also don't forget to change the hover styles as well*/
+  /* line 40, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: pink;
+    background-color: #ff82b2 !important;
+  }
+
+  /* And the brand colour*/
+  /* line 45, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-brand {
+    color: pink;
+  }
+
+  /**panelの設置**/
+  /* line 50, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-body {
+    width: 94%;
+    padding: 3%;
+    margin-left: 50px;
+    margin-top: 2%;
+  }
+
+  /* line 56, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-left {
+    width: 60%;
+    margin-left: 2%;
+    float: left;
+  }
+
+  /* line 61, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-right {
+    width: 35%;
+    float: left;
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  /* line 67, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-head {
+    width: 100%;
+    /*ページ全体の横幅*/
+    margin: 0 auto;
+    /*真ん中配置は左右のmarginをautoで指定します。*/
+  }
+
+  /* line 73, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-bottom {
+    clear: both;
+    /*フッターでfloatを解除します。*/
+    width: 90%;
+    margin-left: 1%;
+  }
+
+  /* line 79, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .checkbox {
+    padding-left: 15px;
+  }
+
+  /*topページ*/
+  /* line 84, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #main {
+    width: 90%;
+    margin-top: 200px;
+  }
+
+  /* line 88, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .top {
+    margin-left: 45%;
+    text-align: center;
+  }
+
+  /*my_page*/
+  /* line 94, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-whole-top {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  /* line 98, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-whole-down {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  /* line 102, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_content {
+    margin-left: 6%;
+    background-color: #fff;
+  }
+
+  /* line 106, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .members_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 112, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_image {
+    margin-left: 8px;
+  }
+
+  /* line 115, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* line 119, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .dropdown {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* line 123, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile {
+    margin-left: 15%;
+  }
+
+  /* line 126, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  /* line 130, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_top_image {
+    margin-left: 10px;
+  }
+
+  /* line 133, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search_box {
+    padding-right: 50px;
+  }
+
+  /* line 136, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search {
+    text-align: center;
+  }
+
+  /* line 139, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 145, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community {
+    margin-right: 2%;
+    width: 100%;
+  }
+
+  /* line 149, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communiy_image {
+    margin-left: 7px;
+  }
+
+  /* line 152, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 155, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-heading a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 158, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .chat_image {
+    width: 50px;
+    height: 50px;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  /* line 166, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .chat {
+    text-align: center;
+    margin-left: 2%;
+  }
+
+  /* line 170, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+
+  /*my_pageのnews*/
+  /* line 175, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-news-list li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  /* my_pageのふきだし */
+  /* line 182, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left {
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    width: auto;
+    min-width: 115px;
+    height: 70px;
+    color: black;
+    line-height: 70px;
+    text-align: center;
+    background: #FFD5EC;
+    border-radius: 60%;
+    margin-top: 15px;
+  }
+
+  /* line 196, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #FFD5EC;
+    border-radius: 30px 0 30px 0;
+  }
+
+  /* line 208, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #ff82b2;
+    border-radius: 30px 0 30px 0;
+    z-index: -1;
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+
+  /* line 223, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-social-whatshot {
+    color: red;
+  }
+
+  /* line 226, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-action-thumb-up {
+    color: navy;
+  }
+
+  /*communities*/
+  /* line 231, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communitytable {
+    padding-top: 30px;
+    padding-left: 50px;
+  }
+
+  /* line 235, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .description {
+    padding-top: 20px;
+  }
+
+  /* line 238, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_members {
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+  }
+
+  /* line 243, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_show {
+    margin-left: 15px;
+  }
+
+  /* line 246, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .comments {
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  /* line 251, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 254, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communitypost {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 15px;
+    margin: 0;
+  }
+
+  /* line 260, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .content {
+    padding-left: 30px;
+  }
+
+  /* line 263, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 269, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communities {
+    margin-left: 6%;
+  }
+
+  /* line 272, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .form-group {
+    overflow: hidden;
+  }
+
+  /* line 275, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communityimage {
+    text-align: center;
+  }
+
+  /*members*/
+  /* line 280, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile {
+    margin-left: 10%;
+  }
+
+  /* line 283, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  /* line 287, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-action-favorite {
+    color: #ff82b2;
+  }
+
+  /* line 290, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search_word {
+    text-align: center;
+  }
+
+  /* line 293, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .result {
+    text-align: center;
+  }
+
+  /* line 296, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .result a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 299, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 302, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+
+  /* line 305, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profileimage {
+    padding-left: 70px;
+  }
+
+  /* line 308, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_message {
+    padding-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  /*news*/
+  /* line 315, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .news {
+    margin-top: -2%;
+  }
+
+  /* line 318, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .news_btn {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}
+@media only screen and (max-width: 901px) {
+  /*901px以下の場合*/
+  /**全体html**/
+  /* line 327, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  html {
+    width: 100%;
+    height: 100%;
+  }
+
+  /**背景画像の設置**/
+  /* line 333, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  body {
+    background-image: url("http://free-background-images.com/sozai/28progress/01l.jpg");
+    /* 全体の背景画像 */
+    background-repeat: no-repeat;
+    /* 背景を繰り返さない */
+    background-position: 50% 50%;
+    /* 背景画像の位置は画面中央 */
+    background-attachment: fixed;
+    /* 背景画像を固定する */
+  }
+
+  /**nav-barの設置**/
+  /* line 345, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default {
+    background-color: #ff82b2 !important;
+    border-color: #ff82b2;
+  }
+
+  /* line 349, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-nav > li > a {
+    color: white;
+  }
+
+  /* Also don't forget to change the hover styles as well*/
+  /* line 353, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: pink;
+    background-color: #ff82b2 !important;
+  }
+
+  /* And the brand colour*/
+  /* line 358, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .navbar-default .navbar-brand {
+    color: pink;
+  }
+
+  /**panelの設置**/
+  /* line 363, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-body {
+    width: 94%;
+    padding: 3%;
+    margin-left: 50px;
+    margin-top: 2%;
+  }
+
+  /* line 369, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-left {
+    width: 60%;
+    margin-left: 2%;
+    float: left;
+  }
+
+  /* line 374, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-right {
+    width: 35%;
+    float: left;
+    margin-right: 1%;
+    margin-left: 1%;
+  }
+
+  /* line 380, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-head {
+    width: 100%;
+    /*ページ全体の横幅*/
+    margin: 0 auto;
+    /*真ん中配置は左右のmarginをautoで指定します。*/
+  }
+
+  /* line 386, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-bottom {
+    clear: both;
+    /*フッターでfloatを解除します。*/
+    width: 90%;
+    margin-left: 1%;
+  }
+
+  /* line 392, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .checkbox {
+    padding-left: 15px;
+  }
+
+  /*topページ*/
+  /* line 397, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #main {
+    width: 90%;
+    margin-top: 200px;
+  }
+
+  /* line 401, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .top {
+    margin-left: 45%;
+    text-align: center;
+  }
+
+  /*my_page*/
+  /* line 407, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-whole-top {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  /* line 411, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-whole-down {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  /* line 415, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_content {
+    margin-left: 6%;
+    background-color: #fff;
+  }
+
+  /* line 419, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .members_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 425, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_image {
+    margin-left: 8px;
+  }
+
+  /* line 428, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .wrapper {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* line 432, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .dropdown {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* line 436, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile {
+    margin-left: 15%;
+  }
+
+  /* line 439, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  /* line 443, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .index_top_image {
+    margin-left: 10px;
+  }
+
+  /* line 446, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search_box {
+    padding-right: 50px;
+  }
+
+  /* line 449, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search {
+    text-align: center;
+  }
+
+  /* line 452, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 458, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community {
+    margin-right: 2%;
+    width: 100%;
+  }
+
+  /* line 462, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communiy_image {
+    margin-left: 7px;
+  }
+
+  /* line 465, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 468, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-heading a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 471, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .chat_image {
+    width: 50px;
+    height: 50px;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+  /* line 479, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .chat {
+    text-align: center;
+    margin-left: 2%;
+  }
+
+  /* line 483, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+
+  /*my_pageのnews*/
+  /* line 488, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-news-list li {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  /* my_pageのふきだし */
+  /* line 495, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left {
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    width: auto;
+    min-width: 115px;
+    height: 70px;
+    color: black;
+    line-height: 70px;
+    text-align: center;
+    background: #FFD5EC;
+    border-radius: 60%;
+    margin-top: 15px;
+  }
+
+  /* line 509, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #FFD5EC;
+    border-radius: 30px 0 30px 0;
+  }
+
+  /* line 521, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  #balloon-4-top-left:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    margin-left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: #ff82b2;
+    border-radius: 30px 0 30px 0;
+    z-index: -1;
+    -webkit-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+  }
+
+  /* line 536, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-social-whatshot {
+    color: red;
+  }
+
+  /* line 539, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-action-thumb-up {
+    color: navy;
+  }
+
+  /*communities*/
+  /* line 544, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communitytable {
+    padding-top: 30px;
+    padding-left: 50px;
+  }
+
+  /* line 548, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .description {
+    padding-top: 20px;
+  }
+
+  /* line 551, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_members {
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-bottom: 20px;
+  }
+
+  /* line 556, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_show {
+    margin-left: 15px;
+  }
+
+  /* line 559, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .comments {
+    padding-left: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  /* line 564, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 567, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communitypost {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 15px;
+    margin: 0;
+  }
+
+  /* line 573, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .content {
+    padding-left: 30px;
+  }
+
+  /* line 576, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .community_index {
+    padding: 0;
+    text-align: center;
+    margin: 1%;
+    width: 30%;
+  }
+
+  /* line 582, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communities {
+    margin-left: 6%;
+  }
+
+  /* line 585, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .form-group {
+    overflow: hidden;
+  }
+
+  /* line 588, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .communityimage {
+    text-align: center;
+  }
+
+  /*members*/
+  /* line 593, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile {
+    margin-left: 10%;
+  }
+
+  /* line 596, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  /* line 600, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .mdi-action-favorite {
+    color: #ff82b2;
+  }
+
+  /* line 603, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .search_word {
+    text-align: center;
+  }
+
+  /* line 606, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .result {
+    text-align: center;
+  }
+
+  /* line 609, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .result a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 612, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .panel-footer a:hover {
+    color: #ff82b2;
+  }
+
+  /* line 615, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .icon-preview {
+    margin-bottom: 1%;
+  }
+
+  /* line 618, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profileimage {
+    padding-left: 70px;
+  }
+
+  /* line 621, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .profile_message {
+    padding-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  /*news*/
+  /* line 628, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .news {
+    margin-top: -2%;
+  }
+
+  /* line 631, /Users/user/Documents/team-b/app/assets/stylesheets/master.scss */
+  .news_btn {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}

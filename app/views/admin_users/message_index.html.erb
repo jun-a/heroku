@@ -1,0 +1,31 @@
+<%= render template: 'layouts/_nav_bar' %>
+<div class="container">
+  <div class="panel panel-default">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>メッセージ内容</th>
+                <th>発信者</th>
+                <th>受信者</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @messages.each_with_index do |message, idx| %>
+            <% if idx % 2 == 0 %>
+            <tr class="success">
+            <% else %>
+            <tr>
+            <% end %>
+                <td><%= message.id %></td>
+                <td><%= message.message %></td>
+                <td><%= Member.find(message.from_member_id).name %></td>
+                <td><%= Member.find(message.to_member_id).name %></td>
+                <td><%= link_to '詳細', member_path(message.to_member_id) %></td>
+                <td><%= link_to '削除', member_path(message.to_member_id) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+    </table>
+  </div>
+</div>
